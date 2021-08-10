@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./TextInput.css";
-import { RecalculateStageRectContext } from '../../context'
+import { RecalculateStageRectContext } from "../../context";
 
 const TextInput = ({
   placeholder,
@@ -10,8 +10,9 @@ const TextInput = ({
   step,
   type
 }) => {
-  const numberInput = React.useRef()
-  const recalculateStageRect = React.useContext(RecalculateStageRectContext)
+  const textInput = React.useRef();
+  const numberInput = React.useRef();
+  const recalculateStageRect = React.useContext(RecalculateStageRectContext);
 
   const handleDragEnd = () => {
     document.removeEventListener("mousemove", handleMouseMove);
@@ -35,13 +36,17 @@ const TextInput = ({
       {type === "number" ? (
         <input
           onKeyDown={e => {
-            if(e.keyCode === 69){
-              e.preventDefault()
+            if (e.keyCode === 69) {
+              e.preventDefault();
               return false;
+            } 
+            else if (e.key === "Escape") {
+              numberInput.current.value = 0;
+              onChange(0);
             }
           }}
           onChange={e => {
-            const inputValue = e.target.value.replace(/[^0-9.]+/g, '');
+            const inputValue = e.target.value.replace(/[^0-9.]+/g, "");
             if (!!inputValue) {
               const value = parseFloat(inputValue, 10);
               if (Number.isNaN(value)) {
@@ -68,15 +73,32 @@ const TextInput = ({
           ref={numberInput}
         />
       ) : (
-        <textarea
+        <input
+          ref={textInput}
+          onKeyDown={e => {
+            if (e.key === "Escape") {
+              textInput.current.value = "";
+              onChange("");
+            }
+          }}
           onChange={e => onChange(e.target.value)}
           onMouseDown={handlePossibleResize}
           type="text"
           placeholder={placeholder}
           className={styles.input}
           value={data}
+          spellCheck={false}
           onDragStart={e => e.stopPropagation()}
-        />
+        ></input>
+        // <textarea
+        //   onChange={e => onChange(e.target.value)}
+        //   onMouseDown={handlePossibleResize}
+        //   type="text"
+        //   placeholder={placeholder}
+        //   className={styles.input}
+        //   value={data}
+        //   onDragStart={e => e.stopPropagation()}
+        // />
       )}
     </div>
   );

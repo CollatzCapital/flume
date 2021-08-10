@@ -10,6 +10,7 @@ const ContextMenu = ({
   onRequestClose,
   onOptionSelected,
   label,
+  description,
   hideHeader,
   hideFilter,
   emptyText
@@ -143,6 +144,11 @@ const ContextMenu = ({
       {!hideHeader && (label ? true : !!options.length) ? (
         <div className={styles.menuHeader}>
           <label className={styles.menuLabel}>{label}</label>
+          {
+            description ? (
+              <p className={styles.menuDescription}>{description}</p>
+            ) : null
+          }
           {!hideFilter && options.length ? (
             <input
               type="text"

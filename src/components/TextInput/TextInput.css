@@ -5,10 +5,11 @@
 .input{
   background: white;
   width: 100%;
-  border: 1px solid darkblue;
+  border-width: 1px;
+  border-color: black;
   font-size: 13px;
   padding: 5px;
-  resize: vertical;
+  resize: none;
   outline: none;
   &::placeholder{
     color: rgb(47, 49, 50);

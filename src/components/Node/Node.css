@@ -59,14 +59,16 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.25rem;
-  color: darkblue;
+  margin: 0;
+  padding: 4px;
+  color: black;
   background-color: white;
-  border: darkblue 1px solid;
+  border: black 1px solid;
+  font-size: 14px;
   z-index: 1;
 }
 
-.nodeoTooltipTitle {
+.nodeTooltipTitle {
   margin: 0;
   font-weight: bold;
 }

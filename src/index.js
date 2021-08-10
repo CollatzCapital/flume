@@ -110,6 +110,11 @@ export let NodeEditor = (
     },
     getComments: () => {
       return comments;
+    },
+    addNode: (nodeType) => {
+      if (this.stageRef.current) {
+        console.log(`I want to add node: ${nodeType}`);
+      }
     }
   }));
 

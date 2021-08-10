@@ -33,9 +33,16 @@ const Node = ({
   const nodeTypes = React.useContext(NodeTypesContext);
   const nodesDispatch = React.useContext(NodeDispatchContext);
   const stageState = React.useContext(StageContext);
-  const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
+  const {
+    label,
+    description,
+    deletable,
+    inputs = [],
+    outputs = []
+  } = nodeTypes[type];
 
   const nodeWrapper = React.useRef();
+  const tooltipRef = React.useRef();
   const [titleMenuOpen, setTitleMenuOpen] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
@@ -173,6 +180,16 @@ const Node = ({
     }
   };
 
+  // const onInfoCircleMouseMove = event => {
+  //   const left = event.clientX + 20;
+  //   const top = event.clientY + 10;
+  //   if (tooltipRef && tooltipRef.current) {
+  //     tooltipRef.current.style.left = left + "px";
+  //     tooltipRef.current.style.top = top + "px";
+  //     tooltipRef.current.style.translate = `translate(${x}px, ${y}px)`;
+  //   }
+  // };
+
   return (
     <Draggable
       className={styles.wrapper}
@@ -191,19 +208,21 @@ const Node = ({
     >
       <div className={styles.titleBar} onContextMenu={handleTitleContextMenu}>
         <p className={styles.title}>{label}</p>
-        <div className={styles.titleBarInfoIcon}>
+        {/* <div
+          className={styles.titleBarInfoIcon}
+          // onMouseMove={onInfoCircleMouseMove}
+        >
           <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon>
-        </div>
+          <div ref={tooltipRef} className={styles.nodeTooltip}>
+            <p className={styles.nodeTooltipTitle}>{label}</p>
+            {description}
+          </div>
+        </div> */}
         {deletable !== false ? (
           <div className={styles.titleBarCloseIcon} onClick={deleteNode}>
             <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
           </div>
         ) : null}
-
-        <div className={styles.nodeTooltip}>
-          <p className={styles.nodeTooltipTitle}>{label}</p>
-          {/* {description} */}
-        </div>
       </div>
       <IoPorts
         nodeId={id}
@@ -213,26 +232,27 @@ const Node = ({
         updateNodeConnections={updateNodeConnections}
         inputData={inputData}
       />
-       {titleMenuOpen ? (
+      {titleMenuOpen ? (
         <Portal>
           <ContextMenu
             x={menuCoordinates.x}
             y={menuCoordinates.y}
             options={[
-                    {
-                      label: "Edit Name",
-                      value: "editName",
-                      description: "Edits the name of the current node."
-                    }
+              {
+                label: "Rename",
+                value: "rename",
+                description: "Renames the current node."
+              }
             ]}
             onRequestClose={closeTitleContextMenu}
             onOptionSelected={handleMenuOption}
             hideFilter
-            label="Node Options"
+            label={label}
+            description={description}
             emptyText="This node has no options."
           />
         </Portal>
-      ) : null} 
+      ) : null}
       {/* {menuOpen ? (
         <Portal>
           <ContextMenu

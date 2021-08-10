@@ -1546,8 +1546,8 @@ PortalWithState.defaultProps = {
   onClose: function onClose() {}
 };
 
-var css$1 = ".ContextMenu_menuWrapper__1BheJ{\r\n  position: fixed;\r\n  z-index: 9999;\r\n  background: white;\r\n  box-shadow: 0px 6px 7px rgba(0,0,0,.3);\r\n  border: 1px solid darkblue;\r\n  font-size: 14px;\r\n  max-width: 300px;\r\n  min-width: 150px;\r\n  font-family: Helvetica, sans-serif;\r\n  line-height: 1.15;\r\n  outline: none;\r\n}\r\n@supports (backdrop-filter: blur(6px)){\r\n  .ContextMenu_menuWrapper__1BheJ{\r\n    backdrop-filter: blur(6px);\r\n    background: white;\r\n  }\r\n}\r\n.ContextMenu_menuHeader__1Cw58{\r\n  padding: 5px;\r\n  border-bottom: 1px solid white;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.ContextMenu_menuLabel__158Pv{\r\n  margin: 0px;\r\n  color: black;\r\n  font-size: 16px;\r\n  font-weight: 600;\r\n}\r\n.ContextMenu_optionsWrapper__2YK_z{\r\n  max-height: 300px;\r\n  overflow-y: auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.ContextMenu_menuFilter__1goBp{\r\n  border: none;\r\n  background: none;\r\n  height: 24px;\r\n  flex: 1 1 auto;\r\n  width: 100%;\r\n  outline: none;\r\n  color: black;\r\n  border: 1px solid black;\r\n}\r\n.ContextMenu_menuFilter__1goBp::placeholder{\r\n    font-style: italic;\r\n  }\r\n.ContextMenu_option__33MDL{\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-shrink: 0;\r\n  padding: 5px;\r\n  border-bottom: 1px solid darkblue;\r\n  color: black;\r\n}\r\n.ContextMenu_option__33MDL:last-child{\r\n    border-bottom: none;\r\n  }\r\n.ContextMenu_option__33MDL:hover{\r\n    background: darkblue;\r\n    color: white;\r\n  }\r\n.ContextMenu_option__33MDL:hover p {\r\n      color: white;\r\n    }\r\n.ContextMenu_option__33MDL label{\r\n    margin-bottom: 5px;\r\n    user-select: none;\r\n  }\r\n.ContextMenu_option__33MDL label:last-child{\r\n      margin-bottom: 0px;\r\n    }\r\n.ContextMenu_option__33MDL p{\r\n    margin: 0px;\r\n    font-style: italic;\r\n    font-size: 12px;\r\n    color: black;\r\n    user-select: none;\r\n  }\r\n.ContextMenu_option__33MDL[data-selected=true]{\r\n    background: white;\r\n  }\r\n.ContextMenu_emptyText__2rcXy{\r\n  color: black;\r\n  padding: 5px;\r\n}\r\n";
-var styles$1 = { "menuWrapper": "ContextMenu_menuWrapper__1BheJ", "menuHeader": "ContextMenu_menuHeader__1Cw58", "menuLabel": "ContextMenu_menuLabel__158Pv", "optionsWrapper": "ContextMenu_optionsWrapper__2YK_z", "menuFilter": "ContextMenu_menuFilter__1goBp", "option": "ContextMenu_option__33MDL", "emptyText": "ContextMenu_emptyText__2rcXy" };
+var css$1 = ".ContextMenu_menuWrapper__1BheJ {\r\n  position: fixed;\r\n  z-index: 9999;\r\n  background: white;\r\n  box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.3);\r\n  border: 1px solid darkblue;\r\n  font-size: 14px;\r\n  max-width: 300px;\r\n  min-width: 150px;\r\n  font-family: Helvetica, sans-serif;\r\n  line-height: 1.15;\r\n  outline: none;\r\n}\r\n@supports (backdrop-filter: blur(6px)) {\r\n  .ContextMenu_menuWrapper__1BheJ {\r\n    backdrop-filter: blur(6px);\r\n    background: white;\r\n  }\r\n}\r\n.ContextMenu_menuHeader__1Cw58 {\r\n  padding: 5px;\r\n  border-bottom: 1px solid white;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.ContextMenu_menuHeader__1Cw58:after {\r\n  border-bottom: 2px solid black;\r\n  content: \"\";\r\n  display: block;\r\n  margin-top: 5px;\r\n  margin-left: 30%;\r\n  width: 40%;\r\n}\r\n.ContextMenu_menuLabel__158Pv {\r\n  margin: 0px;\r\n  color: black;\r\n  font-size: 14px;\r\n  font-weight: 600;\r\n}\r\n.ContextMenu_menuDescription__5rFNS {\r\n  margin: 0px;\r\n}\r\n.ContextMenu_optionsWrapper__2YK_z {\r\n  max-height: 300px;\r\n  overflow-y: auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.ContextMenu_menuFilter__1goBp {\r\n  border: none;\r\n  background: none;\r\n  height: 24px;\r\n  flex: 1 1 auto;\r\n  width: 100%;\r\n  outline: none;\r\n  color: black;\r\n  border: 1px solid black;\r\n}\r\n.ContextMenu_menuFilter__1goBp::placeholder {\r\n    font-style: italic;\r\n  }\r\n.ContextMenu_option__33MDL {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-shrink: 0;\r\n  padding: 5px;\r\n  border-bottom: 1px solid darkblue;\r\n  color: black;\r\n}\r\n.ContextMenu_option__33MDL:last-child {\r\n    border-bottom: none;\r\n  }\r\n.ContextMenu_option__33MDL:hover {\r\n    background: darkblue;\r\n    color: white;\r\n  }\r\n.ContextMenu_option__33MDL:hover p {\r\n      color: white;\r\n    }\r\n.ContextMenu_option__33MDL label {\r\n    margin-bottom: 5px;\r\n    user-select: none;\r\n  }\r\n.ContextMenu_option__33MDL label:last-child {\r\n      margin-bottom: 0px;\r\n    }\r\n.ContextMenu_option__33MDL p {\r\n    margin: 0px;\r\n    font-style: italic;\r\n    font-size: 12px;\r\n    color: black;\r\n    user-select: none;\r\n  }\r\n.ContextMenu_option__33MDL[data-selected=\"true\"] {\r\n    background: white;\r\n  }\r\n.ContextMenu_emptyText__2rcXy {\r\n  color: black;\r\n  padding: 5px;\r\n}\r\n";
+var styles$1 = { "menuWrapper": "ContextMenu_menuWrapper__1BheJ", "menuHeader": "ContextMenu_menuHeader__1Cw58", "menuLabel": "ContextMenu_menuLabel__158Pv", "menuDescription": "ContextMenu_menuDescription__5rFNS", "optionsWrapper": "ContextMenu_optionsWrapper__2YK_z", "menuFilter": "ContextMenu_menuFilter__1goBp", "option": "ContextMenu_option__33MDL", "emptyText": "ContextMenu_emptyText__2rcXy" };
 styleInject(css$1);
 
 /**
@@ -2067,6 +2067,7 @@ var ContextMenu = function ContextMenu(_ref) {
       onRequestClose = _ref.onRequestClose,
       onOptionSelected = _ref.onOptionSelected,
       label = _ref.label,
+      description = _ref.description,
       hideHeader = _ref.hideHeader,
       hideFilter = _ref.hideFilter,
       emptyText = _ref.emptyText;
@@ -2216,6 +2217,11 @@ var ContextMenu = function ContextMenu(_ref) {
         { className: styles$1.menuLabel },
         label
       ),
+      description ? React.createElement(
+        "p",
+        { className: styles$1.menuDescription },
+        description
+      ) : null,
       !hideFilter && options.length ? React.createElement("input", {
         type: "text",
         placeholder: "Filter options",
@@ -5640,8 +5646,8 @@ var Stage = function Stage(_ref) {
   );
 };
 
-var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: white;\r\n  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: darkblue;\r\n  color: white;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  background: darkblue;\r\n  color: white;\r\n  width: 100%;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem 0.25rem;\r\n  flex-grow: 2;\r\n  font-weight: bold;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0.25rem;\r\n  color: darkblue;\r\n  background-color: white;\r\n  border: darkblue 1px solid;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeoTooltipTitle__1AmC0 {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
-var styles$2 = { "wrapper": "Node_wrapper__3SmT7", "label": "Node_label__3MmhF", "titleBar": "Node_titleBar__2eexY", "title": "Node_title__YTBiU", "titleBarInfoIcon": "Node_titleBarInfoIcon__1i0UW", "nodeTooltip": "Node_nodeTooltip__NQ7Es", "titleBarCloseIcon": "Node_titleBarCloseIcon__1o7BD", "nodeoTooltipTitle": "Node_nodeoTooltipTitle__1AmC0" };
+var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: white;\r\n  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: darkblue;\r\n  color: white;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  background: darkblue;\r\n  color: white;\r\n  width: 100%;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem 0.25rem;\r\n  flex-grow: 2;\r\n  font-weight: bold;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
+var styles$2 = { "wrapper": "Node_wrapper__3SmT7", "label": "Node_label__3MmhF", "titleBar": "Node_titleBar__2eexY", "title": "Node_title__YTBiU", "titleBarInfoIcon": "Node_titleBarInfoIcon__1i0UW", "nodeTooltip": "Node_nodeTooltip__NQ7Es", "titleBarCloseIcon": "Node_titleBarCloseIcon__1o7BD", "nodeTooltipTitle": "Node_nodeTooltipTitle__boW0w" };
 styleInject(css$2);
 
 var css$3 = ".Connection_svg__-fKLY{\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  pointer-events: none;\r\n  z-index: 0;\r\n  overflow: visible !important;\r\n}\r\n";
@@ -6239,7 +6245,7 @@ var Checkbox = function Checkbox(_ref) {
   );
 };
 
-var css$7 = ".TextInput_wrapper__tefOZ{\r\n  background: none;\r\n  border: none;\r\n}\r\n.TextInput_input__1QHwS{\r\n  background: white;\r\n  width: 100%;\r\n  border: 1px solid darkblue;\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  resize: vertical;\r\n  outline: none;\r\n}\r\n.TextInput_input__1QHwS::placeholder{\r\n    color: rgb(47, 49, 50);\r\n  }\r\n";
+var css$7 = ".TextInput_wrapper__tefOZ{\r\n  background: none;\r\n  border: none;\r\n}\r\n.TextInput_input__1QHwS{\r\n  background: white;\r\n  width: 100%;\r\n  border-width: 1px;\r\n  border-color: black;\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  resize: none;\r\n  outline: none;\r\n}\r\n.TextInput_input__1QHwS::placeholder{\r\n    color: rgb(47, 49, 50);\r\n  }\r\n";
 var styles$7 = { "wrapper": "TextInput_wrapper__tefOZ", "input": "TextInput_input__1QHwS" };
 styleInject(css$7);
 
@@ -6251,6 +6257,7 @@ var TextInput = function TextInput(_ref) {
       step = _ref.step,
       type = _ref.type;
 
+  var textInput = React.useRef();
   var numberInput = React.useRef();
   var recalculateStageRect = React.useContext(RecalculateStageRectContext);
 
@@ -6279,10 +6286,13 @@ var TextInput = function TextInput(_ref) {
         if (e.keyCode === 69) {
           e.preventDefault();
           return false;
+        } else if (e.key === "Escape") {
+          numberInput.current.value = 0;
+          _onChange(0);
         }
       },
       onChange: function onChange(e) {
-        var inputValue = e.target.value.replace(/[^0-9.]+/g, '');
+        var inputValue = e.target.value.replace(/[^0-9.]+/g, "");
         if (!!inputValue) {
           var value = parseFloat(inputValue, 10);
           if (Number.isNaN(value)) {
@@ -6309,7 +6319,14 @@ var TextInput = function TextInput(_ref) {
         return e.stopPropagation();
       },
       ref: numberInput
-    }) : React.createElement("textarea", {
+    }) : React.createElement("input", {
+      ref: textInput,
+      onKeyDown: function onKeyDown(e) {
+        if (e.key === "Escape") {
+          textInput.current.value = "";
+          _onChange("");
+        }
+      },
       onChange: function onChange(e) {
         return _onChange(e.target.value);
       },
@@ -6318,10 +6335,21 @@ var TextInput = function TextInput(_ref) {
       placeholder: placeholder,
       className: styles$7.input,
       value: data,
+      spellCheck: false,
       onDragStart: function onDragStart(e) {
         return e.stopPropagation();
       }
     })
+    // <textarea
+    //   onChange={e => onChange(e.target.value)}
+    //   onMouseDown={handlePossibleResize}
+    //   type="text"
+    //   placeholder={placeholder}
+    //   className={styles.input}
+    //   value={data}
+    //   onDragStart={e => e.stopPropagation()}
+    // />
+
   );
 };
 
@@ -7029,11 +7057,6 @@ var Port = function Port(_ref7) {
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
-var faInfoCircle = {
-  prefix: 'fas',
-  iconName: 'info-circle',
-  icon: [512, 512, [], "f05a", "M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"]
-};
 var faTimes = {
   prefix: 'fas',
   iconName: 'times',
@@ -8567,6 +8590,7 @@ var Node = function Node(_ref) {
   var stageState = React.useContext(StageContext);
   var _nodeTypes$type = nodeTypes[type],
       label = _nodeTypes$type.label,
+      description = _nodeTypes$type.description,
       deletable = _nodeTypes$type.deletable,
       _nodeTypes$type$input = _nodeTypes$type.inputs,
       inputs = _nodeTypes$type$input === undefined ? [] : _nodeTypes$type$input,
@@ -8575,6 +8599,7 @@ var Node = function Node(_ref) {
 
 
   var nodeWrapper = React.useRef();
+  var tooltipRef = React.useRef();
 
   var _React$useState = React.useState(false),
       _React$useState2 = slicedToArray(_React$useState, 2),
@@ -8700,6 +8725,16 @@ var Node = function Node(_ref) {
     }
   };
 
+  // const onInfoCircleMouseMove = event => {
+  //   const left = event.clientX + 20;
+  //   const top = event.clientY + 10;
+  //   if (tooltipRef && tooltipRef.current) {
+  //     tooltipRef.current.style.left = left + "px";
+  //     tooltipRef.current.style.top = top + "px";
+  //     tooltipRef.current.style.translate = `translate(${x}px, ${y}px)`;
+  //   }
+  // };
+
   return React.createElement(
     Draggable,
     {
@@ -8725,25 +8760,11 @@ var Node = function Node(_ref) {
         { className: styles$2.title },
         label
       ),
-      React.createElement(
-        "div",
-        { className: styles$2.titleBarInfoIcon },
-        React.createElement(FontAwesomeIcon, { icon: faInfoCircle })
-      ),
       deletable !== false ? React.createElement(
         "div",
         { className: styles$2.titleBarCloseIcon, onClick: deleteNode },
         React.createElement(FontAwesomeIcon, { icon: faTimes })
-      ) : null,
-      React.createElement(
-        "div",
-        { className: styles$2.nodeTooltip },
-        React.createElement(
-          "p",
-          { className: styles$2.nodeTooltipTitle },
-          label
-        )
-      )
+      ) : null
     ),
     React.createElement(IoPorts, {
       nodeId: id,
@@ -8760,14 +8781,15 @@ var Node = function Node(_ref) {
         x: menuCoordinates.x,
         y: menuCoordinates.y,
         options: [{
-          label: "Edit Name",
-          value: "editName",
-          description: "Edits the name of the current node."
+          label: "Rename",
+          value: "rename",
+          description: "Renames the current node."
         }],
         onRequestClose: closeTitleContextMenu,
         onOptionSelected: handleMenuOption,
         hideFilter: true,
-        label: "Node Options",
+        label: label,
+        description: description,
         emptyText: "This node has no options."
       })
     ) : null
@@ -10199,6 +10221,8 @@ var RootEngine = function () {
   return RootEngine;
 }();
 
+var _this = undefined;
+
 var defaultContext = {};
 
 var NodeEditor = function NodeEditor(_ref, ref) {
@@ -10297,6 +10321,11 @@ var NodeEditor = function NodeEditor(_ref, ref) {
       },
       getComments: function getComments() {
         return comments;
+      },
+      addNode: function addNode(nodeType) {
+        if (_this.stageRef.current) {
+          console.log("I want to add node: " + nodeType);
+        }
       }
     };
   });
