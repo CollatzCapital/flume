@@ -1,10 +1,9 @@
 .menuWrapper{
   position: fixed;
   z-index: 9999;
-  background: rgba(29, 32, 34, 0.95);
-  border-radius: 5px;
+  background: white;
   box-shadow: 0px 6px 7px rgba(0,0,0,.3);
-  border: 1px solid rgba(0,0,0,.4);
+  border: 1px solid darkblue;
   font-size: 14px;
   max-width: 300px;
   min-width: 150px;
@@ -15,18 +14,18 @@
 @supports (backdrop-filter: blur(6px)){
   .menuWrapper{
     backdrop-filter: blur(6px);
-    background: rgba(29, 32, 34, 0.8);
+    background: white;
   }
 }
 .menuHeader{
   padding: 5px;
-  border-bottom: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid white;
   display: flex;
   flex-direction: column;
 }
 .menuLabel{
   margin: 0px;
-  color: #fff;
+  color: black;
   font-size: 16px;
   font-weight: 600;
 }
@@ -43,7 +42,8 @@
   flex: 1 1 auto;
   width: 100%;
   outline: none;
-  color: #fff;
+  color: black;
+  border: 1px solid black;
   &::placeholder{
     font-style: italic;
   }
@@ -53,13 +53,17 @@
   flex-direction: column;
   flex-shrink: 0;
   padding: 5px;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  color: #ffffff;
+  border-bottom: 1px solid darkblue;
+  color: black;
   &:last-child{
     border-bottom: none;
   }
   &:hover{
-    background: rgba(255,255,255,.05);
+    background: darkblue;
+    color: white;
+    p {
+      color: white;
+    }
   }
   label{
     margin-bottom: 5px;
@@ -72,14 +76,14 @@
     margin: 0px;
     font-style: italic;
     font-size: 12px;
-    color: rgb(182, 186, 194);
+    color: black;
     user-select: none;
   }
   &[data-selected=true]{
-    background: rgba(255,255,255,.05);
+    background: white;
   }
 }
 .emptyText{
-  color: #fff;
+  color: black;
   padding: 5px;
 }

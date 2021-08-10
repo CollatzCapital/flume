@@ -11,6 +11,8 @@ import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import Draggable from "../Draggable/Draggable";
+import { faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Node = ({
   id,
@@ -34,6 +36,7 @@ const Node = ({
   const { label, deletable, inputs = [], outputs = [] } = nodeTypes[type];
 
   const nodeWrapper = React.useRef();
+  const [titleMenuOpen, setTitleMenuOpen] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
 
@@ -130,6 +133,17 @@ const Node = ({
     onDragStart();
   };
 
+  const handleTitleContextMenu = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMenuCoordinates({ x: e.clientX, y: e.clientY });
+    setTitleMenuOpen(true);
+    return false;
+  };
+  const closeTitleContextMenu = () => {
+    setTitleMenuOpen(false);
+  };
+
   const handleContextMenu = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -142,13 +156,17 @@ const Node = ({
     setMenuOpen(false);
   };
 
+  const deleteNode = () => {
+    nodesDispatch({
+      type: "REMOVE_NODE",
+      nodeId: id
+    });
+  };
+
   const handleMenuOption = ({ value }) => {
     switch (value) {
       case "deleteNode":
-        nodesDispatch({
-          type: "REMOVE_NODE",
-          nodeId: id
-        });
+        deleteNode();
         break;
       default:
         return;
@@ -167,11 +185,26 @@ const Node = ({
       onDragEnd={stopDrag}
       innerRef={nodeWrapper}
       data-node-id={id}
-      onContextMenu={handleContextMenu}
       stageState={stageState}
       stageRect={stageRect}
+      onContextMenu={handleContextMenu}
     >
-      <h2 className={styles.label}>{label}</h2>
+      <div className={styles.titleBar} onContextMenu={handleTitleContextMenu}>
+        <p className={styles.title}>{label}</p>
+        <div className={styles.titleBarInfoIcon}>
+          <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon>
+        </div>
+        {deletable !== false ? (
+          <div className={styles.titleBarCloseIcon} onClick={deleteNode}>
+            <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
+          </div>
+        ) : null}
+
+        <div className={styles.nodeTooltip}>
+          <p className={styles.nodeTooltipTitle}>{label}</p>
+          {/* {description} */}
+        </div>
+      </div>
       <IoPorts
         nodeId={id}
         inputs={inputs}
@@ -180,7 +213,27 @@ const Node = ({
         updateNodeConnections={updateNodeConnections}
         inputData={inputData}
       />
-      {menuOpen ? (
+       {titleMenuOpen ? (
+        <Portal>
+          <ContextMenu
+            x={menuCoordinates.x}
+            y={menuCoordinates.y}
+            options={[
+                    {
+                      label: "Edit Name",
+                      value: "editName",
+                      description: "Edits the name of the current node."
+                    }
+            ]}
+            onRequestClose={closeTitleContextMenu}
+            onOptionSelected={handleMenuOption}
+            hideFilter
+            label="Node Options"
+            emptyText="This node has no options."
+          />
+        </Portal>
+      ) : null} 
+      {/* {menuOpen ? (
         <Portal>
           <ContextMenu
             x={menuCoordinates.x}
@@ -203,7 +256,7 @@ const Node = ({
             emptyText="This node has no options."
           />
         </Portal>
-      ) : null}
+      ) : null} */}
     </Draggable>
   );
 };

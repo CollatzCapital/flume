@@ -1,10 +1,9 @@
 .wrapper{
   font-size: 14px;
   padding: 3px 6px;
-  border-radius: 4px;
-  background: linear-gradient(to top, #5b5f62, #6f7477);
+  background: white;
   width: 100%;
-  border: 1px solid #3c3e40;
+  border: 1px solid darkblue;
   padding-right: 15px;
   position: relative;
   &::after{
@@ -20,15 +19,14 @@
     border-color: #191b1c transparent transparent transparent;
   }
   &:hover{
-    background: linear-gradient(to top, #63676a, #777b7e);
+    background: aliceblue;
   }
 }
 .chipWrapper{
   font-size: 14px;
   padding: 3px 6px;
-  border-radius: 4px;
-  background: linear-gradient(to top, #5b5f62, #6f7477);
-  border: 1px solid #3c3e40;
+  background: white;
+  border: 1px solid darkblue;
   margin: 2px;
   position: relative;
 }
@@ -50,8 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to top, #5b5f62, #6f7477);
-  border-radius: 3px;
+  background: white;
   border: none;
   font-weight: bold;
   opacity: 0;
@@ -60,15 +57,14 @@
   opacity: 1;
 }
 .deleteButton:hover{
-  background: linear-gradient(to top, #64696c, #797f82);
+  background: aliceblue;
 }
 .selectedWrapper{
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
-  background: linear-gradient(to top, #5b5f62, #6f7477);
+  background: white;
   width: 100%;
-  border: 1px solid #3c3e40;
+  border: 1px solid darkblue;
   font-size: 14px;
   padding: 3px 6px;
   padding-right: 15px;

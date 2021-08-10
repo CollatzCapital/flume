@@ -1,5 +1,6 @@
 import React from 'react'
 
+export const ThemeContext = React.createContext()
 export const NodeTypesContext = React.createContext()
 export const PortTypesContext = React.createContext()
 export const NodeDispatchContext = React.createContext()

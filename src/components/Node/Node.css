@@ -1,7 +1,6 @@
-.wrapper{
-  background: rgba(91, 96, 99, 0.9);
-  border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,.4);
+.wrapper {
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   position: absolute;
   left: 0px;
   top: 0px;
@@ -11,13 +10,63 @@
   z-index: 1;
   cursor: default;
 }
-.label{
+
+.label {
   font-size: 13px;
-  text-transform: uppercase;
   padding: 5px;
-  background: #464b4e;
-  border-radius: 5px 5px 0px 0px;
+  background: darkblue;
+  color: white;
   margin: 0px;
   margin-bottom: 3px;
-  border-bottom: 1px solid rgba(0,0,0,.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.titleBar {
+  display: flex;
+  background: darkblue;
+  color: white;
+  width: 100%;
+  padding: 0.25rem;
+}
+
+.title {
+  margin: 0rem 0.25rem;
+  flex-grow: 2;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.titleBarInfoIcon {
+  padding: 0 0.25rem;
+}
+
+.titleBarInfoIcon:hover .nodeTooltip {
+  display: block;
+}
+
+.titleBarCloseIcon {
+  padding: 0 0.25rem;
+}
+
+.titleBarCloseIcon:hover {
+  background-color: #e81123;
+}
+
+.nodeTooltip {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.25rem;
+  color: darkblue;
+  background-color: white;
+  border: darkblue 1px solid;
+  z-index: 1;
+}
+
+.nodeoTooltipTitle {
+  margin: 0;
+  font-weight: bold;
 }
