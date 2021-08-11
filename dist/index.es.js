@@ -5415,7 +5415,7 @@ var Stage = function Stage(_ref) {
       outerStageChildren = _ref.outerStageChildren,
       numNodes = _ref.numNodes,
       stageRef = _ref.stageRef,
-      spaceToPan = _ref.spaceToPan,
+      controlToPan = _ref.controlToPan,
       dispatchComments = _ref.dispatchComments,
       disableComments = _ref.disableComments,
       disablePan = _ref.disablePan,
@@ -5440,8 +5440,8 @@ var Stage = function Stage(_ref) {
 
   var _React$useState5 = React.useState(false),
       _React$useState6 = slicedToArray(_React$useState5, 2),
-      spaceIsPressed = _React$useState6[0],
-      setSpaceIsPressed = _React$useState6[1];
+      ctrlIsPressed = _React$useState6[0],
+      setCtrlIsPressed = _React$useState6[1];
 
   var setStageRect = React.useCallback(function () {
     stageRef.current = wrapper.current.getBoundingClientRect();
@@ -5522,41 +5522,58 @@ var Stage = function Stage(_ref) {
     return 1 / scale * value;
   };
 
-  var addNode = function addNode(_ref4) {
-    var node = _ref4.node,
-        internalType = _ref4.internalType;
+  var _addNode = function _addNode(nodeType, fromCursor) {
+    var internalType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
 
-    var wrapperRect = wrapper.current.getBoundingClientRect();
-    var x = byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) + byScale(translate.x);
-    var y = byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) + byScale(translate.y);
-    if (internalType === "comment") {
-      dispatchComments({
-        type: "ADD_COMMENT",
-        x: x,
-        y: y
-      });
-    } else {
-      dispatchNodes({
-        type: "ADD_NODE",
-        x: x,
-        y: y,
-        nodeType: node.type
-      });
+    var schema = nodeTypes[nodeType];
+    if (schema) {
+      var wrapperRect = wrapper.current.getBoundingClientRect();
+      var xOffset = fromCursor ? byScale(menuCoordinates.x - wrapperRect.x - wrapperRect.width / 2) : byScale(200 - wrapperRect.x - wrapperRect.width / 2);
+      var yOffset = fromCursor ? byScale(menuCoordinates.y - wrapperRect.y - wrapperRect.height / 2) : byScale(100 - wrapperRect.y - wrapperRect.height / 2);
+      var x = xOffset + byScale(translate.x);
+      var y = yOffset + byScale(translate.y);
+      if (internalType === "comment") {
+        dispatchComments({
+          type: "ADD_COMMENT",
+          x: x,
+          y: y
+        });
+      } else {
+        dispatchNodes({
+          type: "ADD_NODE",
+          x: x,
+          y: y,
+          nodeType: nodeType
+        });
+      }
     }
   };
 
+  React.useImperativeHandle(stageRef, function () {
+    return {
+      addNode: function addNode(nodeType) {
+        _addNode(nodeType);
+      },
+      clearNodes: function clearNodes() {
+        dispatchNodes({
+          type: "CLEAR_NODES"
+        });
+      }
+    };
+  });
+
   var handleDocumentKeyUp = function handleDocumentKeyUp(e) {
-    if (e.which === 32) {
-      setSpaceIsPressed(false);
+    if (e.which === 17) {
+      setCtrlIsPressed(false);
       document.removeEventListener("keyup", handleDocumentKeyUp);
     }
   };
 
   var handleKeyDown = function handleKeyDown(e) {
-    if (e.which === 32 && document.activeElement === wrapper.current) {
+    if (e.which === 17 && document.activeElement === wrapper.current) {
       e.preventDefault();
       e.stopPropagation();
-      setSpaceIsPressed(true);
+      setCtrlIsPressed(true);
       document.addEventListener("keyup", handleDocumentKeyUp);
     }
   };
@@ -5590,7 +5607,12 @@ var Stage = function Stage(_ref) {
       };
     }), ["sortIndex", "label"]);
     if (!disableComments) {
-      options.push({ value: "comment", label: "Comment", description: "A comment for documenting nodes", internalType: "comment" });
+      options.push({
+        value: "comment",
+        label: "Comment",
+        description: "A comment for documenting nodes",
+        internalType: "comment"
+      });
     }
     return options;
   }, [nodeTypes, disableComments]);
@@ -5610,8 +5632,8 @@ var Stage = function Stage(_ref) {
       onKeyDown: handleKeyDown,
       tabIndex: -1,
       stageState: { scale: scale, translate: translate },
-      style: { cursor: spaceIsPressed && spaceToPan ? "grab" : "" },
-      disabled: disablePan || spaceToPan && !spaceIsPressed,
+      style: { cursor: ctrlIsPressed && controlToPan ? "grab" : "" },
+      disabled: disablePan || controlToPan && !ctrlIsPressed,
       "data-flume-stage": true
     },
     menuOpen ? React.createElement(
@@ -5622,7 +5644,9 @@ var Stage = function Stage(_ref) {
         y: menuCoordinates.y,
         options: menuOptions,
         onRequestClose: closeContextMenu,
-        onOptionSelected: addNode,
+        onOptionSelected: function onOptionSelected(o) {
+          return _addNode(o.node.type, true, o.internalType);
+        },
         label: "Add Node"
       })
     ) : null,
@@ -6254,7 +6278,6 @@ var TextInput = function TextInput(_ref) {
       updateNodeConnections = _ref.updateNodeConnections,
       _onChange = _ref.onChange,
       data = _ref.data,
-      step = _ref.step,
       type = _ref.type;
 
   var textInput = React.useRef();
@@ -6309,9 +6332,8 @@ var TextInput = function TextInput(_ref) {
           numberInput.current.value = 0;
         }
       },
-      step: step || "1",
       onMouseDown: handlePossibleResize,
-      type: type || "text",
+      type: "text",
       placeholder: placeholder,
       className: styles$7.input,
       defaultValue: data,
@@ -9691,7 +9713,12 @@ var reconcileNodes = function reconcileNodes(initialNodes, nodeTypes, portTypes,
   // Reconcile input data for each node
   var reconciledNodes = Object.values(nodes).reduce(function (nodesObj, node) {
     var nodeType = nodeTypes[node.type];
-    var defaultInputData = getDefaultData({ node: node, nodeType: nodeType, portTypes: portTypes, context: context });
+    var defaultInputData = getDefaultData({
+      node: node,
+      nodeType: nodeType,
+      portTypes: portTypes,
+      context: context
+    });
     var currentInputData = Object.entries(node.inputData).reduce(function (dataObj, _ref3) {
       var _ref4 = slicedToArray(_ref3, 2),
           key = _ref4[0],
@@ -9835,12 +9862,12 @@ var nodesReducer = function nodesReducer(nodes) {
         var portId = transput.nodeId + transput.portName + transputType;
         delete cache.current.ports[portId];
 
-        var cnxType = transputType === 'input' ? 'inputs' : 'outputs';
+        var cnxType = transputType === "input" ? "inputs" : "outputs";
         var connections = nodes[transput.nodeId].connections[cnxType][transput.portName];
         if (!connections || !connections.length) return nodes;
 
         return connections.reduce(function (nodes, cnx) {
-          var _ref7 = transputType === 'input' ? [transput, cnx] : [cnx, transput],
+          var _ref7 = transputType === "input" ? [transput, cnx] : [cnx, transput],
               _ref8 = slicedToArray(_ref7, 2),
               input = _ref8[0],
               output = _ref8[1];
@@ -9893,6 +9920,15 @@ var nodesReducer = function nodesReducer(nodes) {
         var nodeId = action.nodeId;
 
         return removeNode(nodes, nodeId);
+      }
+
+    case "CLEAR_NODES":
+      {
+        var nodesToDelete = Object.values(nodes);
+        nodesToDelete.forEach(function (node) {
+          nodes = removeNode(nodes, node.id);
+        });
+        return nodes;
       }
 
     case "HYDRATE_DEFAULT_NODES":
@@ -10221,8 +10257,6 @@ var RootEngine = function () {
   return RootEngine;
 }();
 
-var _this = undefined;
-
 var defaultContext = {};
 
 var NodeEditor = function NodeEditor(_ref, ref) {
@@ -10239,8 +10273,8 @@ var NodeEditor = function NodeEditor(_ref, ref) {
       onChange = _ref.onChange,
       onCommentsChange = _ref.onCommentsChange,
       initialScale = _ref.initialScale,
-      _ref$spaceToPan = _ref.spaceToPan,
-      spaceToPan = _ref$spaceToPan === undefined ? false : _ref$spaceToPan,
+      _ref$controlToPan = _ref.controlToPan,
+      controlToPan = _ref$controlToPan === undefined ? true : _ref$controlToPan,
       _ref$hideComments = _ref.hideComments,
       hideComments = _ref$hideComments === undefined ? false : _ref$hideComments,
       _ref$disableComments = _ref.disableComments,
@@ -10323,8 +10357,13 @@ var NodeEditor = function NodeEditor(_ref, ref) {
         return comments;
       },
       addNode: function addNode(nodeType) {
-        if (_this.stageRef.current) {
-          console.log("I want to add node: " + nodeType);
+        if (stage.current) {
+          stage.current.addNode(nodeType);
+        }
+      },
+      clearNodes: function clearNodes() {
+        if (stage.current) {
+          stage.current.clearNodes();
         }
       }
     };
@@ -10388,7 +10427,7 @@ var NodeEditor = function NodeEditor(_ref, ref) {
                         editorId: editorId,
                         scale: stageState.scale,
                         translate: stageState.translate,
-                        spaceToPan: spaceToPan,
+                        controlToPan: controlToPan,
                         disablePan: disablePan,
                         disableZoom: disableZoom,
                         dispatchStageState: dispatchStageState,

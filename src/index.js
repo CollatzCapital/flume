@@ -43,7 +43,7 @@ export let NodeEditor = (
     onChange,
     onCommentsChange,
     initialScale,
-    spaceToPan = false,
+    controlToPan = true,
     hideComments = false,
     disableComments = false,
     disableZoom = false,
@@ -56,7 +56,7 @@ export let NodeEditor = (
   const editorId = useId();
   const cache = React.useRef(new Cache());
   const stage = React.useRef();
-  const [sideEffectToasts, setSideEffectToasts] = React.useState()
+  const [sideEffectToasts, setSideEffectToasts] = React.useState();
   const [toasts, dispatchToasts] = React.useReducer(toastsReducer, []);
   const [nodes, dispatchNodes] = React.useReducer(
     connectNodesReducer(
@@ -65,7 +65,8 @@ export let NodeEditor = (
       setSideEffectToasts
     ),
     {},
-    () => getInitialNodes(initialNodes, defaultNodes, nodeTypes, portTypes, context)
+    () =>
+      getInitialNodes(initialNodes, defaultNodes, nodeTypes, portTypes, context)
   );
   const [comments, dispatchComments] = React.useReducer(
     commentsReducer,
@@ -111,9 +112,14 @@ export let NodeEditor = (
     getComments: () => {
       return comments;
     },
-    addNode: (nodeType) => {
-      if (this.stageRef.current) {
-        console.log(`I want to add node: ${nodeType}`);
+    addNode: nodeType => {
+      if (stage.current) {
+        stage.current.addNode(nodeType);
+      }
+    },
+    clearNodes: () => {
+      if (stage.current) {
+        stage.current.clearNodes();
       }
     }
   }));
@@ -135,11 +141,11 @@ export let NodeEditor = (
   }, [comments, previousComments, onCommentsChange]);
 
   React.useEffect(() => {
-    if(sideEffectToasts){
-      dispatchToasts(sideEffectToasts)
-      setSideEffectToasts(null)
+    if (sideEffectToasts) {
+      dispatchToasts(sideEffectToasts);
+      setSideEffectToasts(null);
     }
-  }, [sideEffectToasts])
+  }, [sideEffectToasts]);
 
   return (
     <PortTypesContext.Provider value={portTypes}>
@@ -157,7 +163,7 @@ export let NodeEditor = (
                         editorId={editorId}
                         scale={stageState.scale}
                         translate={stageState.translate}
-                        spaceToPan={spaceToPan}
+                        controlToPan={controlToPan}
                         disablePan={disablePan}
                         disableZoom={disableZoom}
                         dispatchStageState={dispatchStageState}

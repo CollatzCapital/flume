@@ -133,7 +133,12 @@ const reconcileNodes = (initialNodes, nodeTypes, portTypes, context) => {
   // Reconcile input data for each node
   let reconciledNodes = Object.values(nodes).reduce((nodesObj, node) => {
     const nodeType = nodeTypes[node.type];
-    const defaultInputData = getDefaultData({ node, nodeType, portTypes, context });
+    const defaultInputData = getDefaultData({
+      node,
+      nodeType,
+      portTypes,
+      context
+    });
     const currentInputData = Object.entries(node.inputData).reduce(
       (dataObj, [key, data]) => {
         if (defaultInputData[key] !== undefined) {
@@ -179,7 +184,12 @@ export const getInitialNodes = (
   portTypes,
   context
 ) => {
-  const reconciledNodes = reconcileNodes(initialNodes, nodeTypes, portTypes, context);
+  const reconciledNodes = reconcileNodes(
+    initialNodes,
+    nodeTypes,
+    portTypes,
+    context
+  );
 
   return {
     ...reconciledNodes,
@@ -237,7 +247,8 @@ const nodesReducer = (
         input.portName
       ];
       if (inputIsNotConnected) {
-        const allowCircular = circularBehavior === "warn" || circularBehavior === "allow"
+        const allowCircular =
+          circularBehavior === "warn" || circularBehavior === "allow";
         const newNodes = addConnection(nodes, input, output, portTypes);
         const isCircular = checkForCircularNodes(newNodes, output.nodeId);
         if (isCircular && !allowCircular) {
@@ -250,7 +261,7 @@ const nodesReducer = (
           });
           return nodes;
         } else {
-          if(isCircular && circularBehavior === "warn"){
+          if (isCircular && circularBehavior === "warn") {
             dispatchToasts({
               type: "ADD_TOAST",
               title: "Circular Connection Detected",
@@ -278,13 +289,16 @@ const nodesReducer = (
       const portId = transput.nodeId + transput.portName + transputType;
       delete cache.current.ports[portId];
 
-      const cnxType = transputType === 'input' ? 'inputs' : 'outputs';
-      const connections = nodes[transput.nodeId].connections[cnxType][transput.portName];
+      const cnxType = transputType === "input" ? "inputs" : "outputs";
+      const connections =
+        nodes[transput.nodeId].connections[cnxType][transput.portName];
       if (!connections || !connections.length) return nodes;
 
       return connections.reduce((nodes, cnx) => {
-        const [input, output] = transputType === 'input' ? [transput, cnx] : [cnx, transput];
-        const id = output.nodeId + output.portName + input.nodeId + input.portName;
+        const [input, output] =
+          transputType === "input" ? [transput, cnx] : [cnx, transput];
+        const id =
+          output.nodeId + output.portName + input.nodeId + input.portName;
         delete cache.current.connections[id];
         deleteConnection({ id });
         return removeConnection(nodes, input, output);
@@ -329,13 +343,21 @@ const nodesReducer = (
       return removeNode(nodes, nodeId);
     }
 
+    case "CLEAR_NODES": {
+      let nodesToDelete = Object.values(nodes);
+      nodesToDelete.forEach(node => {
+        nodes = removeNode(nodes, node.id);
+      });
+      return nodes;
+    }
+
     case "HYDRATE_DEFAULT_NODES": {
       const newNodes = { ...nodes };
       for (const key in newNodes) {
         if (newNodes[key].defaultNode) {
           const newNodeId = nanoid(10);
           const { id, defaultNode, ...node } = newNodes[key];
-          newNodes[newNodeId] = {...node, id: newNodeId };
+          newNodes[newNodeId] = { ...node, id: newNodeId };
           delete newNodes[key];
         }
       }

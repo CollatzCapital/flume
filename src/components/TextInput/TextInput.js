@@ -7,7 +7,6 @@ const TextInput = ({
   updateNodeConnections,
   onChange,
   data,
-  step,
   type
 }) => {
   const textInput = React.useRef();
@@ -63,9 +62,8 @@ const TextInput = ({
               numberInput.current.value = 0;
             }
           }}
-          step={step || "1"}
           onMouseDown={handlePossibleResize}
-          type={type || "text"}
+          type="text"
           placeholder={placeholder}
           className={styles.input}
           defaultValue={data}

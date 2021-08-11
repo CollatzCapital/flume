@@ -604,9 +604,18 @@ const engine = new RootEngine(
 export default () => {
   const [nodes, setNodes] = React.useState({});
   const [comments, setComments] = React.useState({});
+  const nodeEditorRef = React.useRef();
+  const onButtonClicked = () => {
+    nodeEditorRef.current.addNode('animal');
+  }
+  const onClearButtonClicked = () => {
+    nodeEditorRef.current.clearNodes();
+  }
+
   return (
     <div className="wrapper" style={{ lineHeight: 1.8 }}>
       <NodeEditor
+        ref={nodeEditorRef}
         portTypes={flumeConfig.portTypes}
         nodeTypes={flumeConfig.nodeTypes}
         nodes={nodes}
@@ -623,15 +632,18 @@ export default () => {
         ]}
         // debug
       />
-      <div style={{ marginTop: 30 }}>
-        <Website nodes={nodes} />
+      <div>
+        <button onClick={onButtonClicked}>ADD NODE</button>
+        <button onClick={onClearButtonClicked}>CLEAR NODES</button>
       </div>
     </div>
   );
 };
 
 const useInfiniteEngine = (nodes, engine, context, options = {}) =>
-  Object.keys(nodes).length ? engine.resolveRootNode(nodes, { context, ...options }) : {};
+  Object.keys(nodes).length
+    ? engine.resolveRootNode(nodes, { context, ...options })
+    : {};
 
 const Website = ({ nodes }) => {
   const {
