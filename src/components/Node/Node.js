@@ -240,8 +240,7 @@ const Node = ({
             options={[
               {
                 label: "Rename",
-                value: "rename",
-                description: "Renames the current node."
+                value: "rename"
               }
             ]}
             onRequestClose={closeTitleContextMenu}

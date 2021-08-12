@@ -6392,7 +6392,7 @@ var Select = function Select(_ref) {
   var _ref$options = _ref.options,
       options = _ref$options === undefined ? [] : _ref$options,
       _ref$placeholder = _ref.placeholder,
-      placeholder = _ref$placeholder === undefined ? "[Select an option]" : _ref$placeholder,
+      placeholder = _ref$placeholder === undefined ? "Select..." : _ref$placeholder,
       onChange = _ref.onChange,
       data = _ref.data,
       allowMultiple = _ref.allowMultiple;
@@ -6794,7 +6794,6 @@ var Input = function Input(_ref3) {
       data = _ref3.data,
       localControls = _ref3.controls,
       inputTypes = _ref3.inputTypes,
-      noControls = _ref3.noControls,
       triggerRecalculation = _ref3.triggerRecalculation,
       updateNodeConnections = _ref3.updateNodeConnections,
       isConnected = _ref3.isConnected,
@@ -6821,7 +6820,7 @@ var Input = function Input(_ref3) {
     "div",
     {
       className: styles$4.transput,
-      "data-controlless": isConnected || noControls || !controls.length,
+      "data-controlless": isConnected || !controls.length,
       onDragStart: function onDragStart(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -6835,12 +6834,12 @@ var Input = function Input(_ref3) {
       isInput: true,
       triggerRecalculation: triggerRecalculation
     }) : null,
-    (!controls.length || noControls || isConnected) && React__default.createElement(
+    (!controls.length || !controls.length || isConnected) && React__default.createElement(
       "label",
       { className: styles$4.portLabel },
       label || defaultLabel
     ),
-    !noControls && !isConnected ? React__default.createElement(
+    controls.length && !isConnected ? React__default.createElement(
       "div",
       { className: styles$4.controls },
       controls.map(function (control) {
@@ -8811,8 +8810,7 @@ var Node = function Node(_ref) {
         y: menuCoordinates.y,
         options: [{
           label: "Rename",
-          value: "rename",
-          description: "Renames the current node."
+          value: "rename"
         }],
         onRequestClose: closeTitleContextMenu,
         onOptionSelected: handleMenuOption,

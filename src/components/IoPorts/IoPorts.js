@@ -103,7 +103,6 @@ const Input = ({
   data,
   controls: localControls,
   inputTypes,
-  noControls,
   triggerRecalculation,
   updateNodeConnections,
   isConnected,
@@ -125,7 +124,7 @@ const Input = ({
   return (
     <div
       className={styles.transput}
-      data-controlless={isConnected || noControls || !controls.length}
+      data-controlless={isConnected || !controls.length}
       onDragStart={e => {
         e.preventDefault();
         e.stopPropagation();
@@ -141,10 +140,10 @@ const Input = ({
           triggerRecalculation={triggerRecalculation}
         />
       ) : null}
-      {(!controls.length || noControls || isConnected) && (
+      {(!controls.length || !controls.length || isConnected) && (
         <label className={styles.portLabel}>{label || defaultLabel}</label>
       )}
-      {!noControls && !isConnected
+      {controls.length && !isConnected
         ? (
           <div className={styles.controls}>
             {
