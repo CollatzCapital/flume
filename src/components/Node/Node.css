@@ -9,6 +9,7 @@
   flex-direction: column;
   z-index: 1;
   cursor: default;
+  outline-offset: 10px;
 }
 
 .label {

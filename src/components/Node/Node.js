@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./Node.css";
 import {
+  SelectedNodesContext,
+  SelectedNodesDispatchContext,
   NodeTypesContext,
   NodeDispatchContext,
   StageContext,
@@ -11,7 +13,7 @@ import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import Draggable from "../Draggable/Draggable";
-import { faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Node = ({
@@ -33,6 +35,9 @@ const Node = ({
   const nodeTypes = React.useContext(NodeTypesContext);
   const nodesDispatch = React.useContext(NodeDispatchContext);
   const stageState = React.useContext(StageContext);
+  const selectedNodesContext = React.useContext(SelectedNodesContext);
+  const dispatchSelectedNodes = React.useContext(SelectedNodesDispatchContext);
+  const isSelected = selectedNodesContext.includes(id);
   const {
     label,
     description,
@@ -190,13 +195,26 @@ const Node = ({
   //   }
   // };
 
+  const style = {
+    width,
+    transform: `translate(${x}px, ${y}px)`
+  };
+  if (isSelected) {
+    style.outline = 'gold dashed 2px';
+    style.zIndex = 2;
+  }
+
+  const onNodeSelected = () => {
+    dispatchSelectedNodes({
+      type: "CLICK_NODE",
+      selectedNode: id
+    });
+  }
+
   return (
     <Draggable
       className={styles.wrapper}
-      style={{
-        width,
-        transform: `translate(${x}px, ${y}px)`
-      }}
+      style={style}
       onDragStart={startDrag}
       onDrag={handleDrag}
       onDragEnd={stopDrag}
@@ -205,6 +223,7 @@ const Node = ({
       stageState={stageState}
       stageRect={stageRect}
       onContextMenu={handleContextMenu}
+      onMouseDown={onNodeSelected}
     >
       <div className={styles.titleBar} onContextMenu={handleTitleContextMenu}>
         <p className={styles.title}>{label}</p>

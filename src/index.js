@@ -6,6 +6,8 @@ import Comment from "./components/Comment/Comment";
 import Toaster from "./components/Toaster/Toaster";
 import Connections from "./components/Connections/Connections";
 import {
+  SelectedNodesContext,
+  SelectedNodesDispatchContext,
   NodeTypesContext,
   PortTypesContext,
   NodeDispatchContext,
@@ -29,6 +31,7 @@ import clamp from "lodash/clamp";
 import Cache from "./Cache";
 import { STAGE_ID, DRAG_CONNECTION_ID } from "./constants";
 import styles from "./styles.css";
+import selectedNodesReducer from "./selectedNodesReducer";
 
 const defaultContext = {};
 
@@ -42,6 +45,7 @@ export let NodeEditor = (
     context = defaultContext,
     onChange,
     onCommentsChange,
+    onSelectionChange,
     initialScale,
     controlToPan = true,
     hideComments = false,
@@ -71,6 +75,10 @@ export let NodeEditor = (
   const [comments, dispatchComments] = React.useReducer(
     commentsReducer,
     initialComments || {}
+  );
+  const [selectedNodes, dispatchSelectedNodes] = React.useReducer(
+    selectedNodesReducer,
+    []
   );
   React.useEffect(() => {
     dispatchNodes({ type: "HYDRATE_DEFAULT_NODES" });
@@ -106,6 +114,9 @@ export let NodeEditor = (
   };
 
   React.useImperativeHandle(ref, () => ({
+    getSelectedNodes: () => {
+      return selectedNodes;
+    },
     getNodes: () => {
       return nodes;
     },
@@ -140,6 +151,18 @@ export let NodeEditor = (
     }
   }, [comments, previousComments, onCommentsChange]);
 
+  const previousSelectedNodes = usePrevious(selectedNodes);
+
+  React.useEffect(() => {
+    if (
+      previousSelectedNodes &&
+      onSelectionChange &&
+      selectedNodes !== previousSelectedNodes
+    ) {
+      onSelectionChange(selectedNodes);
+    }
+  }, [selectedNodes, previousSelectedNodes, onSelectionChange]);
+
   React.useEffect(() => {
     if (sideEffectToasts) {
       dispatchToasts(sideEffectToasts);
@@ -151,90 +174,96 @@ export let NodeEditor = (
     <PortTypesContext.Provider value={portTypes}>
       <NodeTypesContext.Provider value={nodeTypes}>
         <NodeDispatchContext.Provider value={dispatchNodes}>
-          <ConnectionRecalculateContext.Provider value={triggerRecalculation}>
-            <ContextContext.Provider value={context}>
-              <StageContext.Provider value={stageState}>
-                <CacheContext.Provider value={cache}>
-                  <EditorIdContext.Provider value={editorId}>
-                    <RecalculateStageRectContext.Provider
-                      value={recalculateStageRect}
-                    >
-                      <Stage
-                        editorId={editorId}
-                        scale={stageState.scale}
-                        translate={stageState.translate}
-                        controlToPan={controlToPan}
-                        disablePan={disablePan}
-                        disableZoom={disableZoom}
-                        dispatchStageState={dispatchStageState}
-                        dispatchComments={dispatchComments}
-                        disableComments={disableComments || hideComments}
-                        stageRef={stage}
-                        numNodes={Object.keys(nodes).length}
-                        outerStageChildren={
-                          <React.Fragment>
-                            {debug && (
-                              <div className={styles.debugWrapper}>
-                                <button
-                                  className={styles.debugButton}
-                                  onClick={() => console.log(nodes)}
-                                >
-                                  Log Nodes
-                                </button>
-                                <button
-                                  className={styles.debugButton}
-                                  onClick={() =>
-                                    console.log(JSON.stringify(nodes))
-                                  }
-                                >
-                                  Export Nodes
-                                </button>
-                                <button
-                                  className={styles.debugButton}
-                                  onClick={() => console.log(comments)}
-                                >
-                                  Log Comments
-                                </button>
-                              </div>
-                            )}
-                            <Toaster
-                              toasts={toasts}
-                              dispatchToasts={dispatchToasts}
-                            />
-                          </React.Fragment>
-                        }
-                      >
-                        {!hideComments &&
-                          Object.values(comments).map(comment => (
-                            <Comment
-                              {...comment}
-                              stageRect={stage}
-                              dispatch={dispatchComments}
-                              onDragStart={recalculateStageRect}
-                              key={comment.id}
-                            />
-                          ))}
-                        {Object.values(nodes).map(node => (
-                          <Node
-                            {...node}
-                            stageRect={stage}
-                            onDragEnd={triggerRecalculation}
-                            onDragStart={recalculateStageRect}
-                            key={node.id}
-                          />
-                        ))}
-                        <Connections nodes={nodes} editorId={editorId} />
-                        <div
-                          className={styles.dragWrapper}
-                          id={`${DRAG_CONNECTION_ID}${editorId}`}
-                        ></div>
-                      </Stage>
-                    </RecalculateStageRectContext.Provider>
-                  </EditorIdContext.Provider>
-                </CacheContext.Provider>
-              </StageContext.Provider>
-            </ContextContext.Provider>
-          </ConnectionRecalculateContext.Provider>
+          <SelectedNodesContext.Provider value={selectedNodes}>
+            <SelectedNodesDispatchContext.Provider value={dispatchSelectedNodes}>
+              <ConnectionRecalculateContext.Provider
+                value={triggerRecalculation}
+              >
+                <ContextContext.Provider value={context}>
+                  <StageContext.Provider value={stageState}>
+                    <CacheContext.Provider value={cache}>
+                      <EditorIdContext.Provider value={editorId}>
+                        <RecalculateStageRectContext.Provider
+                          value={recalculateStageRect}
+                        >
+                          <Stage
+                            editorId={editorId}
+                            scale={stageState.scale}
+                            translate={stageState.translate}
+                            controlToPan={controlToPan}
+                            disablePan={disablePan}
+                            disableZoom={disableZoom}
+                            dispatchStageState={dispatchStageState}
+                            dispatchComments={dispatchComments}
+                            disableComments={disableComments || hideComments}
+                            stageRef={stage}
+                            numNodes={Object.keys(nodes).length}
+                            outerStageChildren={
+                              <React.Fragment>
+                                {debug && (
+                                  <div className={styles.debugWrapper}>
+                                    <button
+                                      className={styles.debugButton}
+                                      onClick={() => console.log(nodes)}
+                                    >
+                                      Log Nodes
+                                    </button>
+                                    <button
+                                      className={styles.debugButton}
+                                      onClick={() =>
+                                        console.log(JSON.stringify(nodes))
+                                      }
+                                    >
+                                      Export Nodes
+                                    </button>
+                                    <button
+                                      className={styles.debugButton}
+                                      onClick={() => console.log(comments)}
+                                    >
+                                      Log Comments
+                                    </button>
+                                  </div>
+                                )}
+                                <Toaster
+                                  toasts={toasts}
+                                  dispatchToasts={dispatchToasts}
+                                />
+                              </React.Fragment>
+                            }
+                          >
+                            {!hideComments &&
+                              Object.values(comments).map(comment => (
+                                <Comment
+                                  {...comment}
+                                  stageRect={stage}
+                                  dispatch={dispatchComments}
+                                  onDragStart={recalculateStageRect}
+                                  key={comment.id}
+                                />
+                              ))}
+                            {Object.values(nodes).map(node => (
+                              <Node
+                                {...node}
+                                stageRect={stage}
+                                onDragEnd={triggerRecalculation}
+                                onDragStart={recalculateStageRect}
+                                key={node.id}
+                              />
+                            ))}
+                            <Connections nodes={nodes} editorId={editorId} />
+                            <div
+                              className={styles.dragWrapper}
+                              id={`${DRAG_CONNECTION_ID}${editorId}`}
+                            ></div>
+                          </Stage>
+                        </RecalculateStageRectContext.Provider>
+                      </EditorIdContext.Provider>
+                    </CacheContext.Provider>
+                  </StageContext.Provider>
+                </ContextContext.Provider>
+              </ConnectionRecalculateContext.Provider>
+            </SelectedNodesDispatchContext.Provider>
+          </SelectedNodesContext.Provider>
         </NodeDispatchContext.Provider>
       </NodeTypesContext.Provider>
     </PortTypesContext.Provider>

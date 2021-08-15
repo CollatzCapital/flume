@@ -2299,6 +2299,8 @@ var ContextOption = function ContextOption(_ref2) {
 };
 
 var ThemeContext = React.createContext();
+var SelectedNodesContext = React.createContext();
+var SelectedNodesDispatchContext = React.createContext();
 var NodeTypesContext = React.createContext();
 var PortTypesContext = React.createContext();
 var NodeDispatchContext = React.createContext();
@@ -5670,7 +5672,7 @@ var Stage = function Stage(_ref) {
   );
 };
 
-var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: white;\r\n  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: darkblue;\r\n  color: white;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  background: darkblue;\r\n  color: white;\r\n  width: 100%;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem 0.25rem;\r\n  flex-grow: 2;\r\n  font-weight: bold;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
+var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: white;\r\n  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n  outline-offset: 10px;\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: darkblue;\r\n  color: white;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  background: darkblue;\r\n  color: white;\r\n  width: 100%;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem 0.25rem;\r\n  flex-grow: 2;\r\n  font-weight: bold;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
 var styles$2 = { "wrapper": "Node_wrapper__3SmT7", "label": "Node_label__3MmhF", "titleBar": "Node_titleBar__2eexY", "title": "Node_title__YTBiU", "titleBarInfoIcon": "Node_titleBarInfoIcon__1i0UW", "nodeTooltip": "Node_nodeTooltip__NQ7Es", "titleBarCloseIcon": "Node_titleBarCloseIcon__1o7BD", "nodeTooltipTitle": "Node_nodeTooltipTitle__boW0w" };
 styleInject(css$2);
 
@@ -8609,6 +8611,9 @@ var Node = function Node(_ref) {
   var nodeTypes = React.useContext(NodeTypesContext);
   var nodesDispatch = React.useContext(NodeDispatchContext);
   var stageState = React.useContext(StageContext);
+  var selectedNodesContext = React.useContext(SelectedNodesContext);
+  var dispatchSelectedNodes = React.useContext(SelectedNodesDispatchContext);
+  var isSelected = selectedNodesContext.includes(id);
   var _nodeTypes$type = nodeTypes[type],
       label = _nodeTypes$type.label,
       description = _nodeTypes$type.description,
@@ -8756,14 +8761,27 @@ var Node = function Node(_ref) {
   //   }
   // };
 
+  var style = {
+    width: width,
+    transform: "translate(" + x + "px, " + y + "px)"
+  };
+  if (isSelected) {
+    style.outline = 'gold dashed 2px';
+    style.zIndex = 2;
+  }
+
+  var onNodeSelected = function onNodeSelected() {
+    dispatchSelectedNodes({
+      type: "CLICK_NODE",
+      selectedNode: id
+    });
+  };
+
   return React.createElement(
     Draggable,
     {
       className: styles$2.wrapper,
-      style: {
-        width: width,
-        transform: "translate(" + x + "px, " + y + "px)"
-      },
+      style: style,
       onDragStart: startDrag,
       onDrag: handleDrag,
       onDragEnd: stopDrag,
@@ -8771,7 +8789,8 @@ var Node = function Node(_ref) {
       "data-node-id": id,
       stageState: stageState,
       stageRect: stageRect,
-      onContextMenu: handleContextMenu
+      onContextMenu: handleContextMenu,
+      onMouseDown: onNodeSelected
     },
     React.createElement(
       "div",
@@ -10115,6 +10134,24 @@ var css$e = ".styles_dragWrapper__1P7RD{\r\n  z-index: 9999;\r\n  position: abso
 var styles$e = { "dragWrapper": "styles_dragWrapper__1P7RD", "debugWrapper": "styles_debugWrapper__2OSbY" };
 styleInject(css$e);
 
+var selectedNodesReducer = (function () {
+  var selectedNodes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "CLICK_NODE":
+      if (selectedNodes.length === 1 && selectedNodes.includes(action.selectedNode)) {
+        return selectedNodes;
+      } else {
+        return [action.selectedNode];
+      }
+    case "SELECT_NODES":
+      return [].concat(toConsumableArray(selectedNodes), toConsumableArray(action.selectedNodes));
+    default:
+      return selectedNodes;
+  }
+});
+
 var LoopError = function (_Error) {
   inherits(LoopError, _Error);
 
@@ -10270,6 +10307,7 @@ var NodeEditor = function NodeEditor(_ref, ref) {
       context = _ref$context === undefined ? defaultContext : _ref$context,
       onChange = _ref.onChange,
       onCommentsChange = _ref.onCommentsChange,
+      onSelectionChange = _ref.onSelectionChange,
       initialScale = _ref.initialScale,
       _ref$controlToPan = _ref.controlToPan,
       controlToPan = _ref$controlToPan === undefined ? true : _ref$controlToPan,
@@ -10310,6 +10348,11 @@ var NodeEditor = function NodeEditor(_ref, ref) {
       comments = _React$useReducer6[0],
       dispatchComments = _React$useReducer6[1];
 
+  var _React$useReducer7 = React.useReducer(selectedNodesReducer, []),
+      _React$useReducer8 = slicedToArray(_React$useReducer7, 2),
+      selectedNodes = _React$useReducer8[0],
+      dispatchSelectedNodes = _React$useReducer8[1];
+
   React.useEffect(function () {
     dispatchNodes({ type: "HYDRATE_DEFAULT_NODES" });
   }, []);
@@ -10319,13 +10362,13 @@ var NodeEditor = function NodeEditor(_ref, ref) {
       shouldRecalculateConnections = _React$useState4[0],
       setShouldRecalculateConnections = _React$useState4[1];
 
-  var _React$useReducer7 = React.useReducer(stageReducer, {
+  var _React$useReducer9 = React.useReducer(stageReducer, {
     scale: typeof initialScale === "number" ? clamp_1(initialScale, 0.1, 7) : 1,
     translate: { x: 0, y: 0 }
   }),
-      _React$useReducer8 = slicedToArray(_React$useReducer7, 2),
-      stageState = _React$useReducer8[0],
-      dispatchStageState = _React$useReducer8[1];
+      _React$useReducer10 = slicedToArray(_React$useReducer9, 2),
+      stageState = _React$useReducer10[0],
+      dispatchStageState = _React$useReducer10[1];
 
   var recalculateConnections = React.useCallback(function () {
     createConnections(nodes, stageState, editorId);
@@ -10348,6 +10391,9 @@ var NodeEditor = function NodeEditor(_ref, ref) {
 
   React.useImperativeHandle(ref, function () {
     return {
+      getSelectedNodes: function getSelectedNodes() {
+        return selectedNodes;
+      },
       getNodes: function getNodes() {
         return nodes;
       },
@@ -10383,6 +10429,14 @@ var NodeEditor = function NodeEditor(_ref, ref) {
     }
   }, [comments, previousComments, onCommentsChange]);
 
+  var previousSelectedNodes = usePrevious(selectedNodes);
+
+  React.useEffect(function () {
+    if (previousSelectedNodes && onSelectionChange && selectedNodes !== previousSelectedNodes) {
+      onSelectionChange(selectedNodes);
+    }
+  }, [selectedNodes, previousSelectedNodes, onSelectionChange]);
+
   React.useEffect(function () {
     if (sideEffectToasts) {
       dispatchToasts(sideEffectToasts);
@@ -10400,103 +10454,113 @@ var NodeEditor = function NodeEditor(_ref, ref) {
         NodeDispatchContext.Provider,
         { value: dispatchNodes },
         React.createElement(
-          ConnectionRecalculateContext.Provider,
-          { value: triggerRecalculation },
+          SelectedNodesContext.Provider,
+          { value: selectedNodes },
           React.createElement(
-            ContextContext.Provider,
-            { value: context },
+            SelectedNodesDispatchContext.Provider,
+            { value: dispatchSelectedNodes },
             React.createElement(
-              StageContext.Provider,
-              { value: stageState },
+              ConnectionRecalculateContext.Provider,
+              {
+                value: triggerRecalculation
+              },
               React.createElement(
-                CacheContext.Provider,
-                { value: cache },
+                ContextContext.Provider,
+                { value: context },
                 React.createElement(
-                  EditorIdContext.Provider,
-                  { value: editorId },
+                  StageContext.Provider,
+                  { value: stageState },
                   React.createElement(
-                    RecalculateStageRectContext.Provider,
-                    {
-                      value: recalculateStageRect
-                    },
+                    CacheContext.Provider,
+                    { value: cache },
                     React.createElement(
-                      Stage,
-                      {
-                        editorId: editorId,
-                        scale: stageState.scale,
-                        translate: stageState.translate,
-                        controlToPan: controlToPan,
-                        disablePan: disablePan,
-                        disableZoom: disableZoom,
-                        dispatchStageState: dispatchStageState,
-                        dispatchComments: dispatchComments,
-                        disableComments: disableComments || hideComments,
-                        stageRef: stage,
-                        numNodes: Object.keys(nodes).length,
-                        outerStageChildren: React.createElement(
-                          React.Fragment,
-                          null,
-                          debug && React.createElement(
-                            "div",
-                            { className: styles$e.debugWrapper },
-                            React.createElement(
-                              "button",
-                              {
-                                className: styles$e.debugButton,
-                                onClick: function onClick() {
-                                  return console.log(nodes);
-                                }
-                              },
-                              "Log Nodes"
-                            ),
-                            React.createElement(
-                              "button",
-                              {
-                                className: styles$e.debugButton,
-                                onClick: function onClick() {
-                                  return console.log(JSON.stringify(nodes));
-                                }
-                              },
-                              "Export Nodes"
-                            ),
-                            React.createElement(
-                              "button",
-                              {
-                                className: styles$e.debugButton,
-                                onClick: function onClick() {
-                                  return console.log(comments);
-                                }
-                              },
-                              "Log Comments"
+                      EditorIdContext.Provider,
+                      { value: editorId },
+                      React.createElement(
+                        RecalculateStageRectContext.Provider,
+                        {
+                          value: recalculateStageRect
+                        },
+                        React.createElement(
+                          Stage,
+                          {
+                            editorId: editorId,
+                            scale: stageState.scale,
+                            translate: stageState.translate,
+                            controlToPan: controlToPan,
+                            disablePan: disablePan,
+                            disableZoom: disableZoom,
+                            dispatchStageState: dispatchStageState,
+                            dispatchComments: dispatchComments,
+                            disableComments: disableComments || hideComments,
+                            stageRef: stage,
+                            numNodes: Object.keys(nodes).length,
+                            outerStageChildren: React.createElement(
+                              React.Fragment,
+                              null,
+                              debug && React.createElement(
+                                "div",
+                                { className: styles$e.debugWrapper },
+                                React.createElement(
+                                  "button",
+                                  {
+                                    className: styles$e.debugButton,
+                                    onClick: function onClick() {
+                                      return console.log(nodes);
+                                    }
+                                  },
+                                  "Log Nodes"
+                                ),
+                                React.createElement(
+                                  "button",
+                                  {
+                                    className: styles$e.debugButton,
+                                    onClick: function onClick() {
+                                      return console.log(JSON.stringify(nodes));
+                                    }
+                                  },
+                                  "Export Nodes"
+                                ),
+                                React.createElement(
+                                  "button",
+                                  {
+                                    className: styles$e.debugButton,
+                                    onClick: function onClick() {
+                                      return console.log(comments);
+                                    }
+                                  },
+                                  "Log Comments"
+                                )
+                              ),
+                              React.createElement(Toaster, {
+                                toasts: toasts,
+                                dispatchToasts: dispatchToasts
+                              })
                             )
-                          ),
-                          React.createElement(Toaster, {
-                            toasts: toasts,
-                            dispatchToasts: dispatchToasts
+                          },
+                          !hideComments && Object.values(comments).map(function (comment) {
+                            return React.createElement(Comment, _extends({}, comment, {
+                              stageRect: stage,
+                              dispatch: dispatchComments,
+                              onDragStart: recalculateStageRect,
+                              key: comment.id
+                            }));
+                          }),
+                          Object.values(nodes).map(function (node) {
+                            return React.createElement(Node, _extends({}, node, {
+                              stageRect: stage,
+                              onDragEnd: triggerRecalculation,
+                              onDragStart: recalculateStageRect,
+                              key: node.id
+                            }));
+                          }),
+                          React.createElement(Connections, { nodes: nodes, editorId: editorId }),
+                          React.createElement("div", {
+                            className: styles$e.dragWrapper,
+                            id: "" + DRAG_CONNECTION_ID + editorId
                           })
                         )
-                      },
-                      !hideComments && Object.values(comments).map(function (comment) {
-                        return React.createElement(Comment, _extends({}, comment, {
-                          stageRect: stage,
-                          dispatch: dispatchComments,
-                          onDragStart: recalculateStageRect,
-                          key: comment.id
-                        }));
-                      }),
-                      Object.values(nodes).map(function (node) {
-                        return React.createElement(Node, _extends({}, node, {
-                          stageRect: stage,
-                          onDragEnd: triggerRecalculation,
-                          onDragStart: recalculateStageRect,
-                          key: node.id
-                        }));
-                      }),
-                      React.createElement(Connections, { nodes: nodes, editorId: editorId }),
-                      React.createElement("div", {
-                        className: styles$e.dragWrapper,
-                        id: "" + DRAG_CONNECTION_ID + editorId
-                      })
+                      )
                     )
                   )
                 )

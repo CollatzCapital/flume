@@ -606,11 +606,15 @@ export default () => {
   const [comments, setComments] = React.useState({});
   const nodeEditorRef = React.useRef();
   const onButtonClicked = () => {
-    nodeEditorRef.current.addNode('animal');
-  }
+    nodeEditorRef.current.addNode("animal");
+  };
   const onClearButtonClicked = () => {
     nodeEditorRef.current.clearNodes();
-  }
+  };
+
+  const onSelectedNodesChanged = selectedNodes => {
+    console.log(selectedNodes);
+  };
 
   return (
     <div className="wrapper" style={{ lineHeight: 1.8 }}>
@@ -622,6 +626,7 @@ export default () => {
         comments={comments}
         onChange={setNodes}
         onCommentsChange={setComments}
+        onSelectionChange={onSelectedNodesChanged}
         // disableZoom
         defaultNodes={[
           {
