@@ -8,7 +8,7 @@ const MAX_LABEL_LENGTH = 50;
 
 const Select = ({
   options = [],
-  placeholder = "Select...",
+  placeholder = "Select",
   onChange,
   data,
   allowMultiple

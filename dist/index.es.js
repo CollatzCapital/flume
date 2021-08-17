@@ -5425,6 +5425,7 @@ var Stage = function Stage(_ref) {
 
   var nodeTypes = React.useContext(NodeTypesContext);
   var dispatchNodes = React.useContext(NodeDispatchContext);
+  var dispatchSelectedNodes = React.useContext(SelectedNodesDispatchContext);
   var wrapper = React.useRef();
   var translateWrapper = React.useRef();
 
@@ -5545,6 +5546,7 @@ var Stage = function Stage(_ref) {
           type: "ADD_NODE",
           x: x,
           y: y,
+          name: schema.label,
           nodeType: nodeType
         });
       }
@@ -5618,6 +5620,11 @@ var Stage = function Stage(_ref) {
     }
     return options;
   }, [nodeTypes, disableComments]);
+  var handleMouseDown = function handleMouseDown() {
+    dispatchSelectedNodes({
+      type: "CLEAR_SELECTION"
+    });
+  };
 
   return React.createElement(
     Draggable,
@@ -5626,6 +5633,7 @@ var Stage = function Stage(_ref) {
       className: styles.wrapper,
       innerRef: wrapper,
       onContextMenu: handleContextMenu,
+      onMouseDown: handleMouseDown,
       onMouseEnter: handleMouseEnter,
       onDragDelayStart: handleDragDelayStart,
       onDragStart: handleDragStart,
@@ -5672,8 +5680,8 @@ var Stage = function Stage(_ref) {
   );
 };
 
-var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: white;\r\n  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n  outline-offset: 10px;\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: darkblue;\r\n  color: white;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  background: darkblue;\r\n  color: white;\r\n  width: 100%;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem 0.25rem;\r\n  flex-grow: 2;\r\n  font-weight: bold;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
-var styles$2 = { "wrapper": "Node_wrapper__3SmT7", "label": "Node_label__3MmhF", "titleBar": "Node_titleBar__2eexY", "title": "Node_title__YTBiU", "titleBarInfoIcon": "Node_titleBarInfoIcon__1i0UW", "nodeTooltip": "Node_nodeTooltip__NQ7Es", "titleBarCloseIcon": "Node_titleBarCloseIcon__1o7BD", "nodeTooltipTitle": "Node_nodeTooltipTitle__boW0w" };
+var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: white;\r\n  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n  outline-offset: 10px;\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: darkblue;\r\n  color: white;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleContainer__1ovzy {\r\n  background: darkblue;\r\n  color: white;\r\n  width: 100%;\r\n  min-height:25px;\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem;\r\n  padding: 0.25rem 0.5rem;\r\n  font-weight: bold;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleInput__3kwHI {\r\n  outline: none;\r\n  border: 0;\r\n  padding: 0rem 0.25rem;\r\n  min-width: 0;\r\n  font-size: 14px;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarTickIcon__2VAWL {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarTickIcon__2VAWL:hover {\r\n  background-color: green;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
+var styles$2 = { "wrapper": "Node_wrapper__3SmT7", "label": "Node_label__3MmhF", "titleContainer": "Node_titleContainer__1ovzy", "titleBar": "Node_titleBar__2eexY", "title": "Node_title__YTBiU", "titleInput": "Node_titleInput__3kwHI", "titleBarInfoIcon": "Node_titleBarInfoIcon__1i0UW", "nodeTooltip": "Node_nodeTooltip__NQ7Es", "titleBarTickIcon": "Node_titleBarTickIcon__2VAWL", "titleBarCloseIcon": "Node_titleBarCloseIcon__1o7BD", "nodeTooltipTitle": "Node_nodeTooltipTitle__boW0w" };
 styleInject(css$2);
 
 var css$3 = ".Connection_svg__-fKLY{\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  pointer-events: none;\r\n  z-index: 0;\r\n  overflow: visible !important;\r\n}\r\n";
@@ -6387,7 +6395,7 @@ var Select = function Select(_ref) {
   var _ref$options = _ref.options,
       options = _ref$options === undefined ? [] : _ref$options,
       _ref$placeholder = _ref.placeholder,
-      placeholder = _ref$placeholder === undefined ? "Select..." : _ref$placeholder,
+      placeholder = _ref$placeholder === undefined ? "Select" : _ref$placeholder,
       onChange = _ref.onChange,
       data = _ref.data,
       allowMultiple = _ref.allowMultiple;
@@ -7080,6 +7088,11 @@ var Port = function Port(_ref7) {
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
+var faCheck = {
+  prefix: 'fas',
+  iconName: 'check',
+  icon: [512, 512, [], "f00c", "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"]
+};
 var faTimes = {
   prefix: 'fas',
   iconName: 'times',
@@ -8594,6 +8607,7 @@ var convertCurry = convert.bind(null, React.createElement);
 
 var Node = function Node(_ref) {
   var id = _ref.id,
+      name = _ref.name,
       width = _ref.width,
       height = _ref.height,
       x = _ref.x,
@@ -8623,24 +8637,33 @@ var Node = function Node(_ref) {
       _nodeTypes$type$outpu = _nodeTypes$type.outputs,
       outputs = _nodeTypes$type$outpu === undefined ? [] : _nodeTypes$type$outpu;
 
-
   var nodeWrapper = React.useRef();
-  var tooltipRef = React.useRef();
+  var titleEditor = React.useRef();
 
   var _React$useState = React.useState(false),
       _React$useState2 = slicedToArray(_React$useState, 2),
-      titleMenuOpen = _React$useState2[0],
-      setTitleMenuOpen = _React$useState2[1];
+      menuOpen = _React$useState2[0],
+      setMenuOpen = _React$useState2[1];
 
-  var _React$useState3 = React.useState(false),
+  var _React$useState3 = React.useState({ x: 0, y: 0 }),
       _React$useState4 = slicedToArray(_React$useState3, 2),
-      menuOpen = _React$useState4[0],
-      setMenuOpen = _React$useState4[1];
+      menuCoordinates = _React$useState4[0],
+      setMenuCoordinates = _React$useState4[1];
 
-  var _React$useState5 = React.useState({ x: 0, y: 0 }),
+  var _React$useState5 = React.useState(false),
       _React$useState6 = slicedToArray(_React$useState5, 2),
-      menuCoordinates = _React$useState6[0],
-      setMenuCoordinates = _React$useState6[1];
+      isRenaming = _React$useState6[0],
+      setIsRenaming = _React$useState6[1];
+
+  var _React$useState7 = React.useState(""),
+      _React$useState8 = slicedToArray(_React$useState7, 2),
+      editingName = _React$useState8[0],
+      setEditingName = _React$useState8[1];
+
+  var _React$useState9 = React.useState(name ? name : label),
+      _React$useState10 = slicedToArray(_React$useState9, 2),
+      nodeName = _React$useState10[0],
+      setNodeName = _React$useState10[1];
 
   var byScale = function byScale(value) {
     return 1 / stageState.scale * value;
@@ -8713,23 +8736,36 @@ var Node = function Node(_ref) {
     onDragStart();
   };
 
-  var handleTitleContextMenu = function handleTitleContextMenu(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    setMenuCoordinates({ x: e.clientX, y: e.clientY });
-    setTitleMenuOpen(true);
-    return false;
-  };
-  var closeTitleContextMenu = function closeTitleContextMenu() {
-    setTitleMenuOpen(false);
-  };
-
   var handleContextMenu = function handleContextMenu(e) {
     e.preventDefault();
     e.stopPropagation();
     setMenuCoordinates({ x: e.clientX, y: e.clientY });
     setMenuOpen(true);
     return false;
+  };
+
+  var closeContextMenu = function closeContextMenu() {
+    setMenuOpen(false);
+  };
+
+  var handleTickClicked = function handleTickClicked() {
+    setNodeName(editingName);
+    setIsRenaming(false);
+    setEditingName("");
+    nodesDispatch({
+      type: 'RENAME_NODE',
+      nodeId: id,
+      name: editingName
+    });
+  };
+
+  var handleCloseClicked = function handleCloseClicked() {
+    if (isRenaming) {
+      setIsRenaming(false);
+      setEditingName("");
+    } else {
+      deleteNode();
+    }
   };
 
   var deleteNode = function deleteNode() {
@@ -8745,6 +8781,9 @@ var Node = function Node(_ref) {
     switch (value) {
       case "deleteNode":
         deleteNode();
+        break;
+      case "renameNode":
+        handleTitleDoubleClick();
         break;
       default:
         return;
@@ -8766,15 +8805,45 @@ var Node = function Node(_ref) {
     transform: "translate(" + x + "px, " + y + "px)"
   };
   if (isSelected) {
-    style.outline = 'gold dashed 2px';
+    style.outline = "black dashed 2px";
     style.zIndex = 2;
   }
 
-  var onNodeSelected = function onNodeSelected() {
-    dispatchSelectedNodes({
-      type: "CLICK_NODE",
-      selectedNode: id
-    });
+  var onNodeSelected = function onNodeSelected(e) {
+    if (e.ctrlKey) {
+      dispatchSelectedNodes({
+        type: "TOGGLE_CLICK_NODE",
+        selectedNode: id
+      });
+    } else {
+      dispatchSelectedNodes({
+        type: "CLICK_NODE",
+        selectedNode: id
+      });
+    }
+  };
+  var handleTitleKeyDown = function handleTitleKeyDown(e) {
+    switch (e.key) {
+      case "Escape":
+        handleCloseClicked();
+        break;
+      case "Enter":
+      case "Tab":
+        handleTickClicked();
+        break;
+      default:
+        break;
+    }
+  };
+
+  var handleTitleChanging = function handleTitleChanging(e) {
+    setEditingName(e.target.value);
+    setIsRenaming(true);
+  };
+
+  var handleTitleDoubleClick = function handleTitleDoubleClick() {
+    setEditingName(nodeName);
+    setIsRenaming(true);
   };
 
   return React.createElement(
@@ -8790,21 +8859,52 @@ var Node = function Node(_ref) {
       stageState: stageState,
       stageRect: stageRect,
       onContextMenu: handleContextMenu,
-      onMouseDown: onNodeSelected
+      onMouseDown: function onMouseDown(e) {
+        return onNodeSelected(e);
+      }
     },
     React.createElement(
       "div",
-      { className: styles$2.titleBar, onContextMenu: handleTitleContextMenu },
-      React.createElement(
-        "p",
-        { className: styles$2.title },
-        label
-      ),
-      deletable !== false ? React.createElement(
+      { className: styles$2.titleContainer },
+      isRenaming ? React.createElement(
         "div",
-        { className: styles$2.titleBarCloseIcon, onClick: deleteNode },
-        React.createElement(FontAwesomeIcon, { icon: faTimes })
-      ) : null
+        { className: styles$2.titleBar },
+        React.createElement("input", {
+          type: "text",
+          className: styles$2.titleInput,
+          onChange: function onChange(e) {
+            return handleTitleChanging(e);
+          },
+          onMouseDown: function onMouseDown(e) {
+            return e.stopPropagation();
+          },
+          onKeyDown: function onKeyDown(e) {
+            return handleTitleKeyDown(e);
+          },
+          defaultValue: editingName,
+          ref: titleEditor
+        }),
+        React.createElement(
+          "div",
+          {
+            className: styles$2.titleBarTickIcon,
+            onClick: handleTickClicked
+          },
+          React.createElement(FontAwesomeIcon, { icon: faCheck })
+        ),
+        React.createElement(
+          "div",
+          {
+            className: styles$2.titleBarCloseIcon,
+            onClick: handleCloseClicked
+          },
+          React.createElement(FontAwesomeIcon, { icon: faTimes })
+        )
+      ) : React.createElement(
+        "p",
+        { className: styles$2.title, onDoubleClick: handleTitleDoubleClick },
+        nodeName
+      )
     ),
     React.createElement(IoPorts, {
       nodeId: id,
@@ -8814,17 +8914,20 @@ var Node = function Node(_ref) {
       updateNodeConnections: updateNodeConnections,
       inputData: inputData
     }),
-    titleMenuOpen ? React.createElement(
+    menuOpen ? React.createElement(
       Portal$4,
       null,
       React.createElement(ContextMenu, {
         x: menuCoordinates.x,
         y: menuCoordinates.y,
         options: [{
-          label: "Rename",
-          value: "rename"
+          label: "Rename Node",
+          value: "renameNode"
+        }, {
+          label: "Delete Node",
+          value: "deleteNode"
         }],
-        onRequestClose: closeTitleContextMenu,
+        onRequestClose: closeContextMenu,
         onOptionSelected: handleMenuOption,
         hideFilter: true,
         label: label,
@@ -9902,11 +10005,13 @@ var nodesReducer = function nodesReducer(nodes) {
             y = action.y,
             nodeType = action.nodeType,
             _id = action.id,
+            name = action.name,
             defaultNode = action.defaultNode;
 
         var newNodeId = _id || nonSecure(10);
         var newNode = {
           id: newNodeId,
+          name: name,
           x: x,
           y: y,
           type: nodeType,
@@ -9939,6 +10044,21 @@ var nodesReducer = function nodesReducer(nodes) {
         return removeNode(nodes, nodeId);
       }
 
+    case "RENAME_NODE":
+      {
+        var _nodeId = action.nodeId,
+            _name = action.name;
+
+        var targetNode = nodes[_nodeId];
+        if (targetNode) {
+          return _extends({}, nodes, defineProperty({}, _nodeId, _extends({}, targetNode, {
+            name: _name
+          })));
+        } else {
+          return nodes;
+        }
+      }
+
     case "CLEAR_NODES":
       {
         var nodesToDelete = Object.values(nodes);
@@ -9968,17 +10088,17 @@ var nodesReducer = function nodesReducer(nodes) {
 
     case "SET_PORT_DATA":
       {
-        var _nodeId = action.nodeId,
+        var _nodeId2 = action.nodeId,
             portName = action.portName,
             controlName = action.controlName,
             data = action.data,
             setValue = action.setValue;
 
-        var newData = _extends({}, nodes[_nodeId].inputData, defineProperty({}, portName, _extends({}, nodes[_nodeId].inputData[portName], defineProperty({}, controlName, data))));
+        var newData = _extends({}, nodes[_nodeId2].inputData, defineProperty({}, portName, _extends({}, nodes[_nodeId2].inputData[portName], defineProperty({}, controlName, data))));
         if (setValue) {
-          newData = setValue(newData, nodes[_nodeId].inputData);
+          newData = setValue(newData, nodes[_nodeId2].inputData);
         }
-        return _extends({}, nodes, defineProperty({}, _nodeId, _extends({}, nodes[_nodeId], {
+        return _extends({}, nodes, defineProperty({}, _nodeId2, _extends({}, nodes[_nodeId2], {
           inputData: newData
         })));
       }
@@ -9987,9 +10107,9 @@ var nodesReducer = function nodesReducer(nodes) {
       {
         var _x4 = action.x,
             _y = action.y,
-            _nodeId2 = action.nodeId;
+            _nodeId3 = action.nodeId;
 
-        return _extends({}, nodes, defineProperty({}, _nodeId2, _extends({}, nodes[_nodeId2], {
+        return _extends({}, nodes, defineProperty({}, _nodeId3, _extends({}, nodes[_nodeId3], {
           x: _x4,
           y: _y
         })));
@@ -10139,11 +10259,37 @@ var selectedNodesReducer = (function () {
   var action = arguments[1];
 
   switch (action.type) {
+    case "TOGGLE_CLICK_NODE":
+      var shouldAdd = true;
+      var newState = [];
+      selectedNodes.forEach(function (nodeId) {
+        if (nodeId === action.selectedNode) {
+          shouldAdd = false;
+        } else {
+          newState.push(nodeId);
+        }
+      });
+      if (shouldAdd) {
+        newState.push(action.selectedNode);
+      }
+      return newState;
     case "CLICK_NODE":
-      if (selectedNodes.length === 1 && selectedNodes.includes(action.selectedNode)) {
-        return selectedNodes;
-      } else {
+      var isNodeSelected = false;
+      selectedNodes.forEach(function (nodeId) {
+        if (nodeId === action.selectedNode) {
+          isNodeSelected = true;
+        }
+      });
+      if (!isNodeSelected) {
         return [action.selectedNode];
+      } else {
+        return selectedNodes;
+      }
+    case "CLEAR_SELECTION":
+      if (selectedNodes.length > 0) {
+        return [];
+      } else {
+        return selectedNodes;
       }
     case "SELECT_NODES":
       return [].concat(toConsumableArray(selectedNodes), toConsumableArray(action.selectedNodes));

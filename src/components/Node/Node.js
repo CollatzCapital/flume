@@ -13,11 +13,12 @@ import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import Draggable from "../Draggable/Draggable";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Node = ({
   id,
+  name,
   width,
   height,
   x,
@@ -45,12 +46,13 @@ const Node = ({
     inputs = [],
     outputs = []
   } = nodeTypes[type];
-
   const nodeWrapper = React.useRef();
-  const tooltipRef = React.useRef();
-  const [titleMenuOpen, setTitleMenuOpen] = React.useState(false);
+  const titleEditor = React.useRef();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [menuCoordinates, setMenuCoordinates] = React.useState({ x: 0, y: 0 });
+  const [isRenaming, setIsRenaming] = React.useState(false);
+  const [editingName, setEditingName] = React.useState("");
+  const [nodeName, setNodeName] = React.useState(name ? name : label);
 
   const byScale = value => (1 / stageState.scale) * value;
 
@@ -145,17 +147,6 @@ const Node = ({
     onDragStart();
   };
 
-  const handleTitleContextMenu = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    setMenuCoordinates({ x: e.clientX, y: e.clientY });
-    setTitleMenuOpen(true);
-    return false;
-  };
-  const closeTitleContextMenu = () => {
-    setTitleMenuOpen(false);
-  };
-
   const handleContextMenu = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -166,6 +157,26 @@ const Node = ({
 
   const closeContextMenu = () => {
     setMenuOpen(false);
+  };
+
+  const handleTickClicked = () => {
+    setNodeName(editingName);
+    setIsRenaming(false);
+    setEditingName("");
+    nodesDispatch({
+      type: 'RENAME_NODE',
+      nodeId: id,
+      name: editingName
+    })
+  };
+
+  const handleCloseClicked = () => {
+    if (isRenaming) {
+      setIsRenaming(false);
+      setEditingName("");
+    } else {
+      deleteNode();
+    }
   };
 
   const deleteNode = () => {
@@ -179,6 +190,9 @@ const Node = ({
     switch (value) {
       case "deleteNode":
         deleteNode();
+        break;
+      case "renameNode":
+        handleTitleDoubleClick();
         break;
       default:
         return;
@@ -200,16 +214,46 @@ const Node = ({
     transform: `translate(${x}px, ${y}px)`
   };
   if (isSelected) {
-    style.outline = 'gold dashed 2px';
+    style.outline = "black dashed 2px";
     style.zIndex = 2;
   }
 
-  const onNodeSelected = () => {
-    dispatchSelectedNodes({
-      type: "CLICK_NODE",
-      selectedNode: id
-    });
-  }
+  const onNodeSelected = e => {
+    if (e.ctrlKey) {
+      dispatchSelectedNodes({
+        type: "TOGGLE_CLICK_NODE",
+        selectedNode: id
+      });
+    } else {
+      dispatchSelectedNodes({
+        type: "CLICK_NODE",
+        selectedNode: id
+      });
+    }
+  };
+  const handleTitleKeyDown = e => {
+    switch (e.key) {
+      case "Escape":
+        handleCloseClicked();
+        break;
+      case "Enter":
+      case "Tab":
+        handleTickClicked();
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleTitleChanging = e => {
+    setEditingName(e.target.value);
+    setIsRenaming(true);
+  };
+
+  const handleTitleDoubleClick = () => {
+    setEditingName(nodeName);
+    setIsRenaming(true);
+  };
 
   return (
     <Draggable
@@ -223,26 +267,40 @@ const Node = ({
       stageState={stageState}
       stageRect={stageRect}
       onContextMenu={handleContextMenu}
-      onMouseDown={onNodeSelected}
+      onMouseDown={e => onNodeSelected(e)}
     >
-      <div className={styles.titleBar} onContextMenu={handleTitleContextMenu}>
-        <p className={styles.title}>{label}</p>
-        {/* <div
-          className={styles.titleBarInfoIcon}
-          // onMouseMove={onInfoCircleMouseMove}
-        >
-          <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon>
-          <div ref={tooltipRef} className={styles.nodeTooltip}>
-            <p className={styles.nodeTooltipTitle}>{label}</p>
-            {description}
+      <div className={styles.titleContainer}>
+        {isRenaming ? (
+          <div className={styles.titleBar}>
+            <input
+              type="text"
+              className={styles.titleInput}
+              onChange={e => handleTitleChanging(e)}
+              onMouseDown={e => e.stopPropagation()}
+              onKeyDown={e => handleTitleKeyDown(e)}
+              defaultValue={editingName}
+              ref={titleEditor}
+            />
+            <div
+              className={styles.titleBarTickIcon}
+              onClick={handleTickClicked}
+            >
+              <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+            </div>
+            <div
+              className={styles.titleBarCloseIcon}
+              onClick={handleCloseClicked}
+            >
+              <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
+            </div>
           </div>
-        </div> */}
-        {deletable !== false ? (
-          <div className={styles.titleBarCloseIcon} onClick={deleteNode}>
-            <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
-          </div>
-        ) : null}
+        ) : (
+          <p className={styles.title} onDoubleClick={handleTitleDoubleClick}>
+            {nodeName}
+          </p>
+        )}
       </div>
+
       <IoPorts
         nodeId={id}
         inputs={inputs}
@@ -251,18 +309,22 @@ const Node = ({
         updateNodeConnections={updateNodeConnections}
         inputData={inputData}
       />
-      {titleMenuOpen ? (
+      {menuOpen ? (
         <Portal>
           <ContextMenu
             x={menuCoordinates.x}
             y={menuCoordinates.y}
             options={[
               {
-                label: "Rename",
-                value: "rename"
+                label: "Rename Node",
+                value: "renameNode"
+              },
+              {
+                label: "Delete Node",
+                value: "deleteNode"
               }
             ]}
-            onRequestClose={closeTitleContextMenu}
+            onRequestClose={closeContextMenu}
             onOptionSelected={handleMenuOption}
             hideFilter
             label={label}
@@ -271,30 +333,6 @@ const Node = ({
           />
         </Portal>
       ) : null}
-      {/* {menuOpen ? (
-        <Portal>
-          <ContextMenu
-            x={menuCoordinates.x}
-            y={menuCoordinates.y}
-            options={[
-              ...(deletable !== false
-                ? [
-                    {
-                      label: "Delete Node",
-                      value: "deleteNode",
-                      description: "Deletes a node and all of its connections."
-                    }
-                  ]
-                : [])
-            ]}
-            onRequestClose={closeContextMenu}
-            onOptionSelected={handleMenuOption}
-            hideFilter
-            label="Node Options"
-            emptyText="This node has no options."
-          />
-        </Portal>
-      ) : null} */}
     </Draggable>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Stage.css";
 import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
-import { NodeTypesContext, NodeDispatchContext } from "../../context";
+import { NodeTypesContext, NodeDispatchContext, SelectedNodesDispatchContext } from "../../context";
 import Draggable from "../Draggable/Draggable";
 import orderBy from "lodash/orderBy";
 import clamp from "lodash/clamp";
@@ -25,6 +25,7 @@ const Stage = ({
 }) => {
   const nodeTypes = React.useContext(NodeTypesContext);
   const dispatchNodes = React.useContext(NodeDispatchContext);
+  const dispatchSelectedNodes = React.useContext(SelectedNodesDispatchContext);
   const wrapper = React.useRef();
   const translateWrapper = React.useRef();
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -131,6 +132,7 @@ const Stage = ({
           type: "ADD_NODE",
           x,
           y,
+          name: schema.label,
           nodeType
         });
       }
@@ -203,6 +205,11 @@ const Stage = ({
     }
     return options;
   }, [nodeTypes, disableComments]);
+  const handleMouseDown = () => {
+    dispatchSelectedNodes({
+      type: "CLEAR_SELECTION"
+    });
+  }
 
   return (
     <Draggable
@@ -210,6 +217,7 @@ const Stage = ({
       className={styles.wrapper}
       innerRef={wrapper}
       onContextMenu={handleContextMenu}
+      onMouseDown={handleMouseDown}
       onMouseEnter={handleMouseEnter}
       onDragDelayStart={handleDragDelayStart}
       onDragStart={handleDragStart}

@@ -306,10 +306,11 @@ const nodesReducer = (
     }
 
     case "ADD_NODE": {
-      const { x, y, nodeType, id, defaultNode } = action;
+      const { x, y, nodeType, id, name, defaultNode } = action;
       const newNodeId = id || nanoid(10);
       const newNode = {
         id: newNodeId,
+        name,
         x,
         y,
         type: nodeType,
@@ -341,6 +342,22 @@ const nodesReducer = (
     case "REMOVE_NODE": {
       const { nodeId } = action;
       return removeNode(nodes, nodeId);
+    }
+
+    case "RENAME_NODE": {
+      const { nodeId, name } = action;
+      const targetNode = nodes[nodeId];
+      if (targetNode) {
+        return {
+          ...nodes,
+          [nodeId]: {
+            ...targetNode,
+            name: name
+          }
+        }
+      } else {
+        return nodes;
+      }
     }
 
     case "CLEAR_NODES": {
