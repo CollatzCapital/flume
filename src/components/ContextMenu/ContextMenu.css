@@ -1,9 +1,10 @@
 .menuWrapper {
   position: fixed;
   z-index: 9999;
-  background: white;
+  background-color: #161a25;
   box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.3);
-  border: 1px solid darkblue;
+  border: 1px solid #758696;
+  color: #d5dadf;
   font-size: 14px;
   max-width: 300px;
   min-width: 150px;
@@ -14,17 +15,17 @@
 @supports (backdrop-filter: blur(6px)) {
   .menuWrapper {
     backdrop-filter: blur(6px);
-    background: white;
+    background: #161a25;
   }
 }
 .menuHeader {
   padding: 5px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #758696;
   display: flex;
   flex-direction: column;
 }
 .menuHeader:after {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #758696;
   content: "";
   display: block;
   margin-top: 5px;
@@ -33,7 +34,6 @@
 }
 .menuLabel {
   margin: 0px;
-  color: black;
   font-size: 14px;
   font-weight: 600;
 }
@@ -53,8 +53,8 @@
   flex: 1 1 auto;
   width: 100%;
   outline: none;
-  color: black;
-  border: 1px solid black;
+  color: #d5dadf;
+  border: 1px solid #758696;
   &::placeholder {
     font-style: italic;
   }
@@ -64,16 +64,16 @@
   flex-direction: column;
   flex-shrink: 0;
   padding: 5px;
-  border-bottom: 1px solid darkblue;
-  color: black;
+  border-bottom: 1px solid #758696;
+  color: #d5dadf;
   &:last-child {
     border-bottom: none;
   }
   &:hover {
-    background: darkblue;
-    color: white;
+    background: #262d41;
+    color: #d5dadf;
     p {
-      color: white;
+      color: #d5dadf;
     }
   }
   label {
@@ -87,14 +87,30 @@
     margin: 0px;
     font-style: italic;
     font-size: 12px;
-    color: black;
+    color: #d5dadf;
     user-select: none;
   }
   &[data-selected="true"] {
-    background: white;
+    background: #161a25;
   }
 }
 .emptyText {
-  color: black;
+  color: #d5dadf;
   padding: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: #464646;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #515151; 
 }

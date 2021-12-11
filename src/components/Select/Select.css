@@ -1,9 +1,9 @@
 .wrapper{
   font-size: 14px;
   padding: 3px 6px;
-  background: white;
+  background: #161a25;
   width: 100%;
-  border: 1px solid darkblue;
+  border: 1px solid #758696;
   padding-right: 15px;
   position: relative;
   &::after{
@@ -16,17 +16,17 @@
     height: 0;
     border-style: solid;
     border-width: 6px 5px 0 5px;
-    border-color: #191b1c transparent transparent transparent;
+    border-color: #d5dadf transparent transparent transparent;
   }
   &:hover{
-    background: aliceblue;
+    background: #262d41;
   }
 }
 .chipWrapper{
   font-size: 14px;
   padding: 3px 6px;
-  background: white;
-  border: 1px solid darkblue;
+  background-color: #161a25;
+  border: 1px solid #758696;
   margin: 2px;
   position: relative;
 }
@@ -48,7 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
+  background-color: #161a25;
   border: none;
   font-weight: bold;
   opacity: 0;
@@ -62,9 +62,9 @@
 .selectedWrapper{
   display: flex;
   flex-direction: column;
-  background: white;
+  background-color: #161a25;
   width: 100%;
-  border: 1px solid darkblue;
+  border: 1px solid #758696;
   font-size: 14px;
   padding: 3px 6px;
   padding-right: 15px;
@@ -79,7 +79,7 @@
     height: 0;
     border-style: solid;
     border-width: 6px 5px 0 5px;
-    border-color: #191b1c transparent transparent transparent;
+    border-color: #758696 transparent transparent transparent;
   }
   label{
     margin: 0px;
@@ -89,6 +89,6 @@
     margin-top: 5px;
     font-size: 12px;
     font-style: italic;
-    color: rgb(50, 50, 50);
+    color: #d5dadf;
   }
 }

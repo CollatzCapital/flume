@@ -97,7 +97,7 @@ export const createSVG = ({
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   const curve = calculateCurve(from, to)
   path.setAttribute("d", curve)
-  path.setAttribute("stroke", "black");
+  path.setAttribute("stroke", "#758696");
   path.setAttribute("stroke-width", "3");
   path.setAttribute("stroke-linecap", "round");
   path.setAttribute("fill", "none");

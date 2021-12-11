@@ -214,7 +214,7 @@ const Node = ({
     transform: `translate(${x}px, ${y}px)`
   };
   if (isSelected) {
-    style.outline = "black dashed 2px";
+    style.outline = "#758696 dashed 2px";
     style.zIndex = 2;
   }
 
