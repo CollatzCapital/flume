@@ -1,7 +1,7 @@
 .wrapper {
   background: #161a25;
-  border: 1px solid #758696;
-  color: #d5dadf;
+  border: 1px solid #D0CCD0;
+  color: #D0CCD0;
   border-radius: 5px;
   position: absolute;
   left: 0px;
@@ -26,10 +26,11 @@
 }
 
 .titleContainer {
-  background: #161a25;
+  background: #015690;
+  color: white;
   width: 100%;
   min-height: 25px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 4px 4px 0px 0px;
 }
 
 .titleBar {
@@ -53,8 +54,8 @@
   min-width: 0;
   font-size: 14px;
   background: #161a25;
-  border: 1px solid #758696;
-  color: #d5dadf;
+  border: 1px solid #D0CCD0;
+  color: #D0CCD0;
 }
 
 .titleBarInfoIcon {

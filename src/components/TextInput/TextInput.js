@@ -48,12 +48,7 @@ const TextInput = ({
             const inputValue = e.target.value.replace(/[^0-9.]+/g, "");
             if (!!inputValue) {
               const value = parseFloat(inputValue, 10);
-              if (Number.isNaN(value)) {
-                onChange(0);
-              } else {
-                onChange(value);
-                numberInput.current.value = value;
-              }
+              onChange(value);
             }
           }}
           onBlur={e => {
@@ -63,7 +58,7 @@ const TextInput = ({
             }
           }}
           onMouseDown={handlePossibleResize}
-          type="text"
+          type="number"
           placeholder={placeholder}
           className={styles.input}
           defaultValue={data}
