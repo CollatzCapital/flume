@@ -1,80 +1,87 @@
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   margin-top: auto;
   width: 100%;
   padding: 5px;
 }
-.inputs{
+
+.hidden {
+  display: none;
+}
+.inputs {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
   margin-bottom: 10px;
-  &:last-child{
+  &:last-child {
     margin-bottom: 0px;
   }
-  .transput{
-    &:first-child{
-      .portLabel, .port{
+  .transput {
+    &:first-child {
+      .portLabel,
+      .port {
         margin-top: 5px;
       }
     }
-    &:last-child{
-      .portLabel, .port{
+    &:last-child {
+      .portLabel,
+      .port {
         margin-bottom: 5px;
       }
     }
   }
 }
-.outputs{
+.outputs {
   display: flex;
   flex-direction: column;
   margin-left: auto;
   justify-content: flex-end;
   align-items: flex-end;
   width: 100%;
-  .transput{
-    &:last-child{
-      .portLabel, .port{
+  .transput {
+    &:last-child {
+      .portLabel,
+      .port {
         margin-bottom: 5px;
       }
     }
   }
-  &:first-child{
+  &:first-child {
     margin-top: 5px;
   }
 }
-.transput{
+.transput {
   display: flex;
   align-items: center;
   margin-top: 6px;
   margin-bottom: 6px;
-  &:first-child{
+  &:first-child {
     margin-top: 0px;
   }
-  &[data-controlless="true"]{
+  &[data-controlless="true"] {
     margin-top: 6px;
     margin-bottom: 6px;
-    &:first-child{
+    &:first-child {
       margin-top: 0px;
     }
   }
-  &[data-controlless="false"]{
+  &[data-controlless="false"] {
     margin-top: 2px;
     margin-bottom: 2px;
   }
 }
-.controls{
+.controls {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.portLabel{
+.portLabel {
   font-size: 13px;
   font-weight: 400;
 }
-.port{
+.port {
   width: 12px;
   height: 12px;
   background: linear-gradient(to bottom, #acb1b4, #919699);
@@ -82,30 +89,30 @@
   margin-right: 5px;
   margin-left: -11px;
   flex: 0 0 auto;
-  box-shadow: 0px 2px 1px 0px rgba(0,0,0,.6);
-  &:last-child{
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.6);
+  &:last-child {
     margin-right: -11px;
     margin-left: 5px;
   }
-  &[data-port-color="red"]{
+  &[data-port-color="red"] {
     background: #fa4a6f;
   }
-  &[data-port-color="purple"]{
+  &[data-port-color="purple"] {
     background: #9e55fb;
   }
-  &[data-port-color="blue"]{
+  &[data-port-color="blue"] {
     background: #4284f7;
   }
-  &[data-port-color="green"]{
+  &[data-port-color="green"] {
     background: #31dd9f;
   }
-  &[data-port-color="yellow"]{
+  &[data-port-color="yellow"] {
     background: #d6bf47;
   }
-  &[data-port-color="orange"]{
+  &[data-port-color="orange"] {
     background: #fa7841;
   }
-  &[data-port-color="pink"]{
+  &[data-port-color="pink"] {
     background: #fe8aeb;
   }
 }

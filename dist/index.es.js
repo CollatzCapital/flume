@@ -5680,7 +5680,7 @@ var Stage = function Stage(_ref) {
   );
 };
 
-var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: #161a25;\r\n  border: 1px solid #D0CCD0;\r\n  color: #D0CCD0;\r\n  border-radius: 5px;\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n  outline-offset: 10px;\r\n  font-size: 16px;\r\n  font-family: 'Roboto';\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: #161a25;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleContainer__1ovzy {\r\n  background: #015690;\r\n  color: white;\r\n  width: 100%;\r\n  min-height: 25px;\r\n  border-radius: 4px 4px 0px 0px;\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem;\r\n  padding: 0.25rem 0.5rem;\r\n  font-weight: 500;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.Node_titleInput__3kwHI {\r\n  outline: none;\r\n  border: 0;\r\n  padding: 0rem 0.25rem;\r\n  min-width: 0;\r\n  font-size: 14px;\r\n  background: #161a25;\r\n  border: 1px solid #D0CCD0;\r\n  color: #D0CCD0;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarTickIcon__2VAWL {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarTickIcon__2VAWL:hover {\r\n  background-color: green;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
+var css$2 = ".Node_wrapper__3SmT7 {\r\n  background: #161a25;\r\n  border: 1px solid #d0ccd0;\r\n  color: #d0ccd0;\r\n  border-radius: 5px;\r\n  position: absolute;\r\n  left: 0px;\r\n  top: 0px;\r\n  user-select: none;\r\n  display: flex;\r\n  flex-direction: column;\r\n  z-index: 1;\r\n  cursor: default;\r\n  outline-offset: 10px;\r\n  font-size: 16px;\r\n  font-family: \"Roboto\";\r\n}\r\n\r\n.Node_label__3MmhF {\r\n  font-size: 13px;\r\n  padding: 5px;\r\n  background: #161a25;\r\n  margin: 0px;\r\n  margin-bottom: 3px;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.15);\r\n}\r\n\r\n.Node_titleContainer__1ovzy {\r\n  background: #015690;\r\n  color: white;\r\n  width: 100%;\r\n  min-height: 25px;\r\n  border-radius: 4px 4px 0px 0px;\r\n}\r\n\r\n.Node_titleBar__2eexY {\r\n  display: flex;\r\n  padding: 0.25rem;\r\n}\r\n\r\n.Node_title__YTBiU {\r\n  margin: 0rem;\r\n  padding: 0.1rem;\r\n  font-size: 14px;\r\n  font-weight: 500;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  width: 100%;\r\n}\r\n\r\n.Node_titleInput__3kwHI {\r\n  outline: none;\r\n  border: 0;\r\n  padding: 0rem 0.25rem;\r\n  min-width: 0;\r\n  font-size: 14px;\r\n  background: #161a25;\r\n  border: 1px solid #d0ccd0;\r\n  color: white;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarInfoIcon__1i0UW:hover .Node_nodeTooltip__NQ7Es {\r\n  display: block;\r\n}\r\n\r\n.Node_titleBarTickIcon__2VAWL {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarTickIcon__2VAWL:hover {\r\n  background-color: green;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD {\r\n  padding: 0 0.25rem;\r\n}\r\n\r\n.Node_titleBarCloseIcon__1o7BD:hover {\r\n  background-color: #e81123;\r\n}\r\n\r\n.Node_nodeTooltip__NQ7Es {\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  margin: 0;\r\n  padding: 4px;\r\n  color: black;\r\n  background-color: white;\r\n  border: black 1px solid;\r\n  font-size: 14px;\r\n  z-index: 1;\r\n}\r\n\r\n.Node_nodeTooltipTitle__boW0w {\r\n  margin: 0;\r\n  font-weight: bold;\r\n}\r\n";
 var styles$2 = { "wrapper": "Node_wrapper__3SmT7", "label": "Node_label__3MmhF", "titleContainer": "Node_titleContainer__1ovzy", "titleBar": "Node_titleBar__2eexY", "title": "Node_title__YTBiU", "titleInput": "Node_titleInput__3kwHI", "titleBarInfoIcon": "Node_titleBarInfoIcon__1i0UW", "nodeTooltip": "Node_nodeTooltip__NQ7Es", "titleBarTickIcon": "Node_titleBarTickIcon__2VAWL", "titleBarCloseIcon": "Node_titleBarCloseIcon__1o7BD", "nodeTooltipTitle": "Node_nodeTooltipTitle__boW0w" };
 styleInject(css$2);
 
@@ -6239,15 +6239,15 @@ var createConnections = function createConnections(nodes, _ref6, editorId) {
   }
 };
 
-var css$4 = ".IoPorts_wrapper__3d2hh{\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-top: auto;\r\n  width: 100%;\r\n  padding: 5px;\r\n}\r\n.IoPorts_inputs__2etkb{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-end;\r\n  width: 100%;\r\n  margin-bottom: 10px;\r\n}\r\n.IoPorts_inputs__2etkb:last-child{\r\n    margin-bottom: 0px;\r\n  }\r\n.IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:first-child .IoPorts_portLabel__qOE7y, .IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:first-child .IoPorts_port__1_a6J{\r\n        margin-top: 5px;\r\n      }\r\n.IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:last-child .IoPorts_portLabel__qOE7y, .IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:last-child .IoPorts_port__1_a6J{\r\n        margin-bottom: 5px;\r\n      }\r\n.IoPorts_outputs__3JGh-{\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-left: auto;\r\n  justify-content: flex-end;\r\n  align-items: flex-end;\r\n  width: 100%;\r\n}\r\n.IoPorts_outputs__3JGh- .IoPorts_transput__1wbHA:last-child .IoPorts_portLabel__qOE7y, .IoPorts_outputs__3JGh- .IoPorts_transput__1wbHA:last-child .IoPorts_port__1_a6J{\r\n        margin-bottom: 5px;\r\n      }\r\n.IoPorts_outputs__3JGh-:first-child{\r\n    margin-top: 5px;\r\n  }\r\n.IoPorts_transput__1wbHA{\r\n  display: flex;\r\n  align-items: center;\r\n  margin-top: 6px;\r\n  margin-bottom: 6px;\r\n}\r\n.IoPorts_transput__1wbHA:first-child{\r\n    margin-top: 0px;\r\n  }\r\n.IoPorts_transput__1wbHA[data-controlless=\"true\"]{\r\n    margin-top: 6px;\r\n    margin-bottom: 6px;\r\n  }\r\n.IoPorts_transput__1wbHA[data-controlless=\"true\"]:first-child{\r\n      margin-top: 0px;\r\n    }\r\n.IoPorts_transput__1wbHA[data-controlless=\"false\"]{\r\n    margin-top: 2px;\r\n    margin-bottom: 2px;\r\n  }\r\n.IoPorts_controls__1dKFt{\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n}\r\n.IoPorts_portLabel__qOE7y{\r\n  font-size: 13px;\r\n  font-weight: 400;\r\n}\r\n.IoPorts_port__1_a6J{\r\n  width: 12px;\r\n  height: 12px;\r\n  background: linear-gradient(to bottom, #acb1b4, #919699);\r\n  border-radius: 100%;\r\n  margin-right: 5px;\r\n  margin-left: -11px;\r\n  flex: 0 0 auto;\r\n  box-shadow: 0px 2px 1px 0px rgba(0,0,0,.6);\r\n}\r\n.IoPorts_port__1_a6J:last-child{\r\n    margin-right: -11px;\r\n    margin-left: 5px;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"red\"]{\r\n    background: #fa4a6f;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"purple\"]{\r\n    background: #9e55fb;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"blue\"]{\r\n    background: #4284f7;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"green\"]{\r\n    background: #31dd9f;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"yellow\"]{\r\n    background: #d6bf47;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"orange\"]{\r\n    background: #fa7841;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"pink\"]{\r\n    background: #fe8aeb;\r\n  }\r\n";
-var styles$4 = { "wrapper": "IoPorts_wrapper__3d2hh", "inputs": "IoPorts_inputs__2etkb", "transput": "IoPorts_transput__1wbHA", "portLabel": "IoPorts_portLabel__qOE7y", "port": "IoPorts_port__1_a6J", "outputs": "IoPorts_outputs__3JGh-", "controls": "IoPorts_controls__1dKFt" };
+var css$4 = ".IoPorts_wrapper__3d2hh {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-top: auto;\r\n  width: 100%;\r\n  padding: 5px;\r\n}\r\n\r\n.IoPorts_hidden__16NCJ {\r\n  display: none;\r\n}\r\n.IoPorts_inputs__2etkb {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-end;\r\n  width: 100%;\r\n  margin-bottom: 10px;\r\n}\r\n.IoPorts_inputs__2etkb:last-child {\r\n    margin-bottom: 0px;\r\n  }\r\n.IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:first-child .IoPorts_portLabel__qOE7y,\r\n      .IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:first-child .IoPorts_port__1_a6J {\r\n        margin-top: 5px;\r\n      }\r\n.IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:last-child .IoPorts_portLabel__qOE7y,\r\n      .IoPorts_inputs__2etkb .IoPorts_transput__1wbHA:last-child .IoPorts_port__1_a6J {\r\n        margin-bottom: 5px;\r\n      }\r\n.IoPorts_outputs__3JGh- {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-left: auto;\r\n  justify-content: flex-end;\r\n  align-items: flex-end;\r\n  width: 100%;\r\n}\r\n.IoPorts_outputs__3JGh- .IoPorts_transput__1wbHA:last-child .IoPorts_portLabel__qOE7y,\r\n      .IoPorts_outputs__3JGh- .IoPorts_transput__1wbHA:last-child .IoPorts_port__1_a6J {\r\n        margin-bottom: 5px;\r\n      }\r\n.IoPorts_outputs__3JGh-:first-child {\r\n    margin-top: 5px;\r\n  }\r\n.IoPorts_transput__1wbHA {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-top: 6px;\r\n  margin-bottom: 6px;\r\n}\r\n.IoPorts_transput__1wbHA:first-child {\r\n    margin-top: 0px;\r\n  }\r\n.IoPorts_transput__1wbHA[data-controlless=\"true\"] {\r\n    margin-top: 6px;\r\n    margin-bottom: 6px;\r\n  }\r\n.IoPorts_transput__1wbHA[data-controlless=\"true\"]:first-child {\r\n      margin-top: 0px;\r\n    }\r\n.IoPorts_transput__1wbHA[data-controlless=\"false\"] {\r\n    margin-top: 2px;\r\n    margin-bottom: 2px;\r\n  }\r\n.IoPorts_controls__1dKFt {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n}\r\n.IoPorts_portLabel__qOE7y {\r\n  font-size: 13px;\r\n  font-weight: 400;\r\n}\r\n.IoPorts_port__1_a6J {\r\n  width: 12px;\r\n  height: 12px;\r\n  background: linear-gradient(to bottom, #acb1b4, #919699);\r\n  border-radius: 100%;\r\n  margin-right: 5px;\r\n  margin-left: -11px;\r\n  flex: 0 0 auto;\r\n  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.6);\r\n}\r\n.IoPorts_port__1_a6J:last-child {\r\n    margin-right: -11px;\r\n    margin-left: 5px;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"red\"] {\r\n    background: #fa4a6f;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"purple\"] {\r\n    background: #9e55fb;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"blue\"] {\r\n    background: #4284f7;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"green\"] {\r\n    background: #31dd9f;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"yellow\"] {\r\n    background: #d6bf47;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"orange\"] {\r\n    background: #fa7841;\r\n  }\r\n.IoPorts_port__1_a6J[data-port-color=\"pink\"] {\r\n    background: #fe8aeb;\r\n  }\r\n";
+var styles$4 = { "wrapper": "IoPorts_wrapper__3d2hh", "hidden": "IoPorts_hidden__16NCJ", "inputs": "IoPorts_inputs__2etkb", "transput": "IoPorts_transput__1wbHA", "portLabel": "IoPorts_portLabel__qOE7y", "port": "IoPorts_port__1_a6J", "outputs": "IoPorts_outputs__3JGh-", "controls": "IoPorts_controls__1dKFt" };
 styleInject(css$4);
 
-var css$5 = ".Control_wrapper__VZIiC {\r\n  width: 100%;\r\n  padding-right: 3px;\r\n}\r\n.Control_label__1OX-Q {\r\n  font-size: 14px;\r\n}\r\n.Control_controlLabel__3ga2- {\r\n  font-size: 13px;\r\n  display: inline-block;\r\n  margin-left: 2px;\r\n}\r\n";
-var styles$5 = { "wrapper": "Control_wrapper__VZIiC", "label": "Control_label__1OX-Q", "controlLabel": "Control_controlLabel__3ga2-" };
+var css$5 = ".Control_wrapper__VZIiC {\r\n  width: 100%;\r\n  padding-right: 3px;\r\n}\r\n.Control_label__1OX-Q {\r\n  font-size: 14px;\r\n}\r\n.Control_controlLabel__3ga2- {\r\n  font-size: 13px;\r\n  display: inline-block;\r\n  margin-left: 2px;\r\n}\r\n\r\n.Control_hidden__3mCMY {\r\n  display: none;\r\n}\r\n";
+var styles$5 = { "wrapper": "Control_wrapper__VZIiC", "label": "Control_label__1OX-Q", "controlLabel": "Control_controlLabel__3ga2-", "hidden": "Control_hidden__3mCMY" };
 styleInject(css$5);
 
-var css$6 = ".Checkbox_wrapper__aSqyY{\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n.Checkbox_checkbox__Qv5gn {\r\n  background: #161a25;\r\n  border: 1px solid #D0CCD0;\r\n  border-radius: 4px;\r\n  margin-right: 8px;\r\n}\r\n.Checkbox_label__2RxP-{\r\n  padding-top: 2px;\r\n  font-size: 13px;\r\n}\r\n";
+var css$6 = ".Checkbox_wrapper__aSqyY {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n.Checkbox_checkbox__Qv5gn {\r\n  background: #161a25;\r\n  border: 1px solid #d0ccd0;\r\n  border-radius: 4px;\r\n  margin-right: 8px;\r\n}\r\n.Checkbox_label__2RxP- {\r\n  padding-top: 2px;\r\n  font-size: 13px;\r\n  width: 100%;\r\n}\r\n";
 var styles$6 = { "wrapper": "Checkbox_wrapper__aSqyY", "checkbox": "Checkbox_checkbox__Qv5gn", "label": "Checkbox_label__2RxP-" };
 styleInject(css$6);
 
@@ -6264,7 +6264,7 @@ var Checkbox = function Checkbox(_ref) {
     React.createElement("input", {
       className: styles$6.checkbox,
       type: "checkbox",
-      id: id,
+      id: id.current,
       value: data,
       checked: data,
       onChange: function onChange(e) {
@@ -6273,7 +6273,7 @@ var Checkbox = function Checkbox(_ref) {
     }),
     React.createElement(
       "label",
-      { className: styles$6.label, htmlFor: id },
+      { className: styles$6.label, htmlFor: id.current },
       label
     )
   );
@@ -6545,7 +6545,8 @@ var OptionChip = function OptionChip(_ref3) {
 };
 
 var Control = function Control(_ref) {
-  var type = _ref.type,
+  var collapsed = _ref.collapsed,
+      type = _ref.type,
       name = _ref.name,
       nodeId = _ref.nodeId,
       portName = _ref.portName,
@@ -6629,7 +6630,7 @@ var Control = function Control(_ref) {
 
   return React.createElement(
     "div",
-    { className: styles$5.wrapper },
+    { className: collapsed ? styles$5.hidden : styles$5.wrapper },
     calculatedLabel && type !== "checkbox" && type !== "custom" && React.createElement(
       "label",
       { className: styles$5.controlLabel },
@@ -6697,9 +6698,9 @@ function useTransputs(transputsFn, transputType, nodeId, inputData, connections)
       });
       if (!current) {
         nodesDispatch({
-          type: 'DESTROY_TRANSPUT',
+          type: "DESTROY_TRANSPUT",
           transputType: transputType,
-          transput: { nodeId: nodeId, portName: '' + transput.name }
+          transput: { nodeId: nodeId, portName: "" + transput.name }
         });
       }
     };
@@ -6734,7 +6735,8 @@ function useTransputs(transputsFn, transputType, nodeId, inputData, connections)
 }
 
 var IoPorts = function IoPorts(_ref2) {
-  var nodeId = _ref2.nodeId,
+  var collapsed = _ref2.collapsed,
+      nodeId = _ref2.nodeId,
       _ref2$inputs = _ref2.inputs,
       inputs = _ref2$inputs === undefined ? [] : _ref2$inputs,
       _ref2$outputs = _ref2.outputs,
@@ -6745,8 +6747,8 @@ var IoPorts = function IoPorts(_ref2) {
 
   var inputTypes = React.useContext(PortTypesContext);
   var triggerRecalculation = React.useContext(ConnectionRecalculateContext);
-  var resolvedInputs = useTransputs(inputs, 'input', nodeId, inputData, connections);
-  var resolvedOutputs = useTransputs(outputs, 'output', nodeId, inputData, connections);
+  var resolvedInputs = useTransputs(inputs, "input", nodeId, inputData, connections);
+  var resolvedOutputs = useTransputs(outputs, "output", nodeId, inputData, connections);
 
   return React.createElement(
     "div",
@@ -6755,7 +6757,9 @@ var IoPorts = function IoPorts(_ref2) {
       "div",
       { className: styles$4.inputs },
       resolvedInputs.map(function (input) {
-        return React.createElement(Input, _extends({}, input, {
+        return React.createElement(Input, _extends({
+          collapsed: collapsed
+        }, input, {
           data: inputData[input.name] || {},
           isConnected: !!connections.inputs[input.name],
           triggerRecalculation: triggerRecalculation,
@@ -6771,7 +6775,9 @@ var IoPorts = function IoPorts(_ref2) {
       "div",
       { className: styles$4.outputs },
       resolvedOutputs.map(function (output) {
-        return React.createElement(Output, _extends({}, output, {
+        return React.createElement(Output, _extends({
+          collapsed: collapsed
+        }, output, {
           triggerRecalculation: triggerRecalculation,
           inputTypes: inputTypes,
           nodeId: nodeId,
@@ -6785,7 +6791,8 @@ var IoPorts = function IoPorts(_ref2) {
 };
 
 var Input = function Input(_ref3) {
-  var type = _ref3.type,
+  var collapsed = _ref3.collapsed,
+      type = _ref3.type,
       label = _ref3.label,
       name = _ref3.name,
       nodeId = _ref3.nodeId,
@@ -6834,14 +6841,16 @@ var Input = function Input(_ref3) {
     }) : null,
     (!controls.length || !controls.length || isConnected) && React.createElement(
       "label",
-      { className: styles$4.portLabel },
+      { className: collapsed ? styles$4.hidden : styles$4.portLabel },
       label || defaultLabel
     ),
     controls.length && !isConnected ? React.createElement(
       "div",
       { className: styles$4.controls },
       controls.map(function (control) {
-        return React.createElement(Control, _extends({}, control, {
+        return React.createElement(Control, _extends({
+          collapsed: collapsed
+        }, control, {
           nodeId: nodeId,
           portName: name,
           triggerRecalculation: triggerRecalculation,
@@ -6859,7 +6868,8 @@ var Input = function Input(_ref3) {
 };
 
 var Output = function Output(_ref5) {
-  var label = _ref5.label,
+  var collapsed = _ref5.collapsed,
+      label = _ref5.label,
       name = _ref5.name,
       nodeId = _ref5.nodeId,
       type = _ref5.type,
@@ -6882,7 +6892,7 @@ var Output = function Output(_ref5) {
     },
     React.createElement(
       "label",
-      { className: styles$4.portLabel },
+      { className: collapsed ? styles$4.hidden : styles$4.portLabel },
       label || defaultLabel
     ),
     React.createElement(Port, {
@@ -8660,6 +8670,11 @@ var Node = function Node(_ref) {
       nodeName = _React$useState10[0],
       setNodeName = _React$useState10[1];
 
+  var _React$useState11 = React.useState(false),
+      _React$useState12 = slicedToArray(_React$useState11, 2),
+      collapsed = _React$useState12[0],
+      setCollapsed = _React$useState12[1];
+
   var byScale = function byScale(value) {
     return 1 / stageState.scale * value;
   };
@@ -8748,7 +8763,7 @@ var Node = function Node(_ref) {
     setIsRenaming(false);
     setEditingName("");
     nodesDispatch({
-      type: 'RENAME_NODE',
+      type: "RENAME_NODE",
       nodeId: id,
       name: editingName
     });
@@ -8841,6 +8856,50 @@ var Node = function Node(_ref) {
     setIsRenaming(true);
   };
 
+  var titleBarElements = function titleBarElements() {
+    var elements = [];
+    if (isRenaming) {
+      elements.push(React.createElement("input", {
+        type: "text",
+        className: styles$2.titleInput,
+        onChange: function onChange(e) {
+          return handleTitleChanging(e);
+        },
+        onMouseDown: function onMouseDown(e) {
+          return e.stopPropagation();
+        },
+        onKeyDown: function onKeyDown(e) {
+          return handleTitleKeyDown(e);
+        },
+        defaultValue: editingName,
+        ref: titleEditor
+      }));
+      elements.push(React.createElement(
+        "div",
+        { className: styles$2.titleBarTickIcon, onClick: handleTickClicked },
+        React.createElement(FontAwesomeIcon, { icon: faCheck })
+      ));
+      elements.push(React.createElement(
+        "div",
+        { className: styles$2.titleBarCloseIcon, onClick: handleCloseClicked },
+        React.createElement(FontAwesomeIcon, { icon: faTimes })
+      ));
+    } else {
+      elements.push(React.createElement(
+        "p",
+        { className: styles$2.title, onDoubleClick: handleTitleDoubleClick },
+        nodeName
+      ));
+    }
+    // elements.push(
+    //   <div className={styles.titleBarTickIcon} onClick={handleToggleCollapse}>
+    //     <FontAwesomeIcon
+    //       icon={collapsed ? faPlusSquare : faMinusSquare}
+    //     ></FontAwesomeIcon>
+    //   </div>
+    // );
+    return elements;
+  };
   return React.createElement(
     Draggable,
     {
@@ -8861,47 +8920,14 @@ var Node = function Node(_ref) {
     React.createElement(
       "div",
       { className: styles$2.titleContainer },
-      isRenaming ? React.createElement(
+      React.createElement(
         "div",
         { className: styles$2.titleBar },
-        React.createElement("input", {
-          type: "text",
-          className: styles$2.titleInput,
-          onChange: function onChange(e) {
-            return handleTitleChanging(e);
-          },
-          onMouseDown: function onMouseDown(e) {
-            return e.stopPropagation();
-          },
-          onKeyDown: function onKeyDown(e) {
-            return handleTitleKeyDown(e);
-          },
-          defaultValue: editingName,
-          ref: titleEditor
-        }),
-        React.createElement(
-          "div",
-          {
-            className: styles$2.titleBarTickIcon,
-            onClick: handleTickClicked
-          },
-          React.createElement(FontAwesomeIcon, { icon: faCheck })
-        ),
-        React.createElement(
-          "div",
-          {
-            className: styles$2.titleBarCloseIcon,
-            onClick: handleCloseClicked
-          },
-          React.createElement(FontAwesomeIcon, { icon: faTimes })
-        )
-      ) : React.createElement(
-        "p",
-        { className: styles$2.title, onDoubleClick: handleTitleDoubleClick },
-        nodeName
+        titleBarElements()
       )
     ),
     React.createElement(IoPorts, {
+      collapsed: collapsed,
       nodeId: id,
       inputs: inputs,
       outputs: outputs,
@@ -10544,6 +10570,11 @@ var NodeEditor = function NodeEditor(_ref, ref) {
       addNode: function addNode(nodeType) {
         if (stage.current) {
           stage.current.addNode(nodeType);
+        }
+      },
+      loadNodes: function loadNodes(state) {
+        if (stage.current) {
+          stage.current.clearNodes();
         }
       },
       clearNodes: function clearNodes() {

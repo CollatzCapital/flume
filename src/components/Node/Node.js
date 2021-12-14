@@ -13,7 +13,12 @@ import { Portal } from "react-portal";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import IoPorts from "../IoPorts/IoPorts";
 import Draggable from "../Draggable/Draggable";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTimes,
+  faMinusSquare,
+  faPlusSquare
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Node = ({
@@ -53,6 +58,7 @@ const Node = ({
   const [isRenaming, setIsRenaming] = React.useState(false);
   const [editingName, setEditingName] = React.useState("");
   const [nodeName, setNodeName] = React.useState(name ? name : label);
+  const [collapsed, setCollapsed] = React.useState(false);
 
   const byScale = value => (1 / stageState.scale) * value;
 
@@ -164,10 +170,10 @@ const Node = ({
     setIsRenaming(false);
     setEditingName("");
     nodesDispatch({
-      type: 'RENAME_NODE',
+      type: "RENAME_NODE",
       nodeId: id,
       name: editingName
-    })
+    });
   };
 
   const handleCloseClicked = () => {
@@ -255,6 +261,50 @@ const Node = ({
     setIsRenaming(true);
   };
 
+  const handleToggleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const titleBarElements = () => {
+    const elements = [];
+    if (isRenaming) {
+      elements.push(
+        <input
+          type="text"
+          className={styles.titleInput}
+          onChange={e => handleTitleChanging(e)}
+          onMouseDown={e => e.stopPropagation()}
+          onKeyDown={e => handleTitleKeyDown(e)}
+          defaultValue={editingName}
+          ref={titleEditor}
+        />
+      );
+      elements.push(
+        <div className={styles.titleBarTickIcon} onClick={handleTickClicked}>
+          <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+        </div>
+      );
+      elements.push(
+        <div className={styles.titleBarCloseIcon} onClick={handleCloseClicked}>
+          <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
+        </div>
+      );
+    } else {
+      elements.push(
+        <p className={styles.title} onDoubleClick={handleTitleDoubleClick}>
+          {nodeName}
+        </p>
+      );
+    }
+    // elements.push(
+    //   <div className={styles.titleBarTickIcon} onClick={handleToggleCollapse}>
+    //     <FontAwesomeIcon
+    //       icon={collapsed ? faPlusSquare : faMinusSquare}
+    //     ></FontAwesomeIcon>
+    //   </div>
+    // );
+    return elements;
+  };
   return (
     <Draggable
       className={styles.wrapper}
@@ -270,38 +320,11 @@ const Node = ({
       onMouseDown={e => onNodeSelected(e)}
     >
       <div className={styles.titleContainer}>
-        {isRenaming ? (
-          <div className={styles.titleBar}>
-            <input
-              type="text"
-              className={styles.titleInput}
-              onChange={e => handleTitleChanging(e)}
-              onMouseDown={e => e.stopPropagation()}
-              onKeyDown={e => handleTitleKeyDown(e)}
-              defaultValue={editingName}
-              ref={titleEditor}
-            />
-            <div
-              className={styles.titleBarTickIcon}
-              onClick={handleTickClicked}
-            >
-              <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
-            </div>
-            <div
-              className={styles.titleBarCloseIcon}
-              onClick={handleCloseClicked}
-            >
-              <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
-            </div>
-          </div>
-        ) : (
-          <p className={styles.title} onDoubleClick={handleTitleDoubleClick}>
-            {nodeName}
-          </p>
-        )}
+        <div className={styles.titleBar}>{titleBarElements()}</div>
       </div>
 
       <IoPorts
+        collapsed={collapsed}
         nodeId={id}
         inputs={inputs}
         outputs={outputs}

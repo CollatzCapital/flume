@@ -6,6 +6,7 @@ import Select from "../Select/Select";
 import { NodeDispatchContext, ContextContext } from "../../context";
 
 const Control = ({
+  collapsed,
   type,
   name,
   nodeId,
@@ -95,7 +96,7 @@ const Control = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={collapsed ? styles.hidden : styles.wrapper}>
       {calculatedLabel && type !== "checkbox" && type !== "custom" && (
         <label className={styles.controlLabel}>{calculatedLabel}</label>
       )}

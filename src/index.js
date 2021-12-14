@@ -128,6 +128,12 @@ export let NodeEditor = (
         stage.current.addNode(nodeType);
       }
     },
+    loadNodes: state => {
+      if (stage.current) {
+        stage.current.clearNodes();
+        
+      }
+    },
     clearNodes: () => {
       if (stage.current) {
         stage.current.clearNodes();
